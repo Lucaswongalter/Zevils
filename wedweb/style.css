@@ -1,0 +1,159 @@
+body {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	font-size: 10pt;
+	max-width: 1024px;
+	font-family: Geneva, Verdana, sans-serif;
+	color: black;
+	background-color: #eb9d2d;
+}
+
+
+// Headers
+
+.all-header-text {
+	font-family: helvetica, arial, sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
+
+dl.glidey > dt {
+	background-color: #6c3100;
+	color: #1d9dff;
+	border-color: #f5a343;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: 1px;
+	margin-top: 1px;
+	font-weight: bold;
+	font-size: large;
+}
+
+.header-text {
+	padding-bottom: .25ex;
+	padding-top: .25ex;
+	padding-right: .25em;
+	padding-left: .25em;
+}
+
+.subheader-text {
+}
+
+h3 {
+	margin-top: 1ex;
+	font-weight: bold;
+	font-size: medium;
+}
+
+
+
+
+.date {
+	font-weight: bold;
+}
+
+.time {
+	font-weight: bold;
+}
+
+.location {
+	font-weight: bold;
+}
+
+a:link {
+	color: #406edd;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:active {
+	color: #0816ff;
+}
+
+a:visited {
+	color: #901cff;
+}
+
+#page {
+	border-right-style: groove;
+	border-left-style: groove;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	margin-left: 5em;
+	margin-right: 5em;
+	top: 0px;
+	bottom: 0px;
+	position: absolute;
+	margin-bottom: 0px;
+	padding-bottom: 2ex;
+	background-color: #e4e4e4;
+	padding-right: .5em;
+	padding-left: .5em;
+	width: 85%;
+}
+
+#page-header {
+	padding-bottom: 2ex;
+	padding-top: 1ex;
+}
+
+#page-content {
+	padding-bottom: 2ex;
+}
+
+#page-footer {
+	padding-top: 2ex;
+	font-size: 9pt;
+}
+
+// Stuff in the navbar
+
+#countdown {
+	font-size: 9pt;
+	font-style: italic;
+}
+
+#nav {
+	text-align: center;
+}
+
+#nav-selected {
+}
+
+#nav > li {
+	font-size: 9pt;
+	padding-right: 1em;
+	border-left-color: #777777;
+	border-left-style: solid;
+	border-left-width: 1px;
+	padding-left: 1em;
+	list-style-type: none;
+	display: inline;
+}
+
+#nav > li.rightmost {
+	border-right-color: #777777;
+	border-right-style: solid;
+	border-right-width: 1px;
+}
+
+
+// Fancy image thumbnails
+
+.thickbox > img {
+	background-color: white;
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+}
+
+
+.single-image {
+	text-align: center;
+}
+
