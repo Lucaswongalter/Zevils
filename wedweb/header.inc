@@ -13,13 +13,22 @@
         }
         echo '</li>';
     }
+    
+    function fancyImage($file, $caption, $width, $height) {
+    	$file = "images/$file";
+		$thumb = preg_replace('/\.([a-z]+)$/', '-thumb.\1', $file);
+		if(!file_exists($thumb)) $thumb = $file;
+
+    	printf('<a href="%s" title="%s" class="thickbox"><img src="%s" width="%d" height="%d" alt="%s" title="%s"></a>',
+    		$file, $caption, $thumb, $width, $height, $caption, $caption);
+    }
 ?>
 <head>
     <meta charset="UTF-8">
     <title>Gifford-Sachs Wedding</title>
     <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="thickbox.css" type="text/css" media="screen">
     <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="thickbox.css" type="text/css" media="screen" />
     <script src="jquery-1.2.3.min.js" type="text/javascript"></script>
     <script src="thickbox-compressed.js" type="text/javascript"></script>
     <script src="header.js" type="text/javascript"></script>
@@ -28,7 +37,7 @@
 <div id="page">
 
 <div id="page-header">
-<h1 class="all-header-text"><a href="index.php">Elizabeth Gifford and Matthew Sachs's Wedding</a></h1>
+<h1 class="all-header-text"><a href="index.php">Elizabeth and Matthew</a></h1>
 <ul id="nav">
 <? emitNavItem("info.php", "Info"); ?>
 <? emitNavItem("about.php", "About Us"); ?>
