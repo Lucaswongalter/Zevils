@@ -7,7 +7,7 @@
         global $WEBPAGE_FILE;
         echo '<li';
         if($WEBPAGE_FILE == $filename) {
-            echo ' id="nav-selected">' . $title . '</a>';
+            echo ' id="nav-selected">' . $title;
         } else {
             echo '><a href="' . $filename . '">' . $title . '</a>';
         }
