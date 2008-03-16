@@ -1,10 +1,10 @@
-html,body {
-	margin-top: 0;
-	margin-bottom: 0;
+html,body {	
+	margin: 0;
+	padding: 0;
 	padding-bottom: 0;
 	height: 100%;
+    max-width: 70em;
 	font-size: 10pt;
-	max-width: 1024px;
 	font-family: Geneva, Verdana, sans-serif;
 	color: black;
 	background-color: #cc6600;
@@ -20,6 +20,8 @@ html,body {
 	height: auto !important;
 	height: 100%;
 	min-height: 100%;
+	margin-left: 5em;
+	margin-right: 5em;
 
 	margin-top: 0;
 	margin-bottom: 0;
@@ -31,8 +33,6 @@ html,body {
 	border-left-style: groove;
 	border-right-width: 1px;
 	border-left-width: 1px;
-	padding-right: .5em;
-	padding-left: .5em;
 	padding-bottom: 2ex;
 }
 
@@ -46,6 +46,8 @@ html,body {
 }
 
 #page-footer {
+	color: #804000;
+	text-align: center;
 	padding-top: 2ex;
 	font-size: 9pt;
 }
@@ -64,7 +66,7 @@ dl.glidey > dt {
 	margin-right: 0px;
 	font-family: "Lucida Grande", Verdana, Arial, sans-serif;
 	border-color: #6c300d;
-	color: #0080ff;
+	color: #0a9ee5;
 	background-color: #6c3100;
 	border-style: ridge;
 	margin-bottom: 1px;
@@ -83,7 +85,8 @@ dl.glidey > dt {
 }
 
 h3 {
-	margin-top: 1ex;
+	margin-bottom: -1ex;
+	margin-top: 2ex;
 	font-weight: bold;
 	font-size: medium;
 }
@@ -105,7 +108,7 @@ h3 {
 // Links
 
 a:link {
-	color: #406edd;
+	color: #0a9ee5;
 	text-decoration: none;
 }
 
@@ -114,7 +117,7 @@ a:hover {
 }
 
 a:active {
-	color: #0816ff;
+	color: #0a9ee5;
 }
 
 a:visited {
@@ -129,16 +132,19 @@ a:visited {
 }
 
 #nav {
+	margin-top: 10px;
+	padding: 0px;
 	text-align: center;
 }
 
 #nav-selected {
+	color: #804000;
 }
 
 #nav > li {
-	font-size: 9pt;
+	font-size: 10pt;
 	padding-right: 1em;
-	border-left-color: #777777;
+	border-left-color: #804000;
 	border-left-style: solid;
 	border-left-width: 1px;
 	padding-left: 1em;
@@ -147,7 +153,7 @@ a:visited {
 }
 
 #nav > li.rightmost {
-	border-right-color: #777777;
+	border-right-color: #804000;
 	border-right-style: solid;
 	border-right-width: 1px;
 }
@@ -188,6 +194,10 @@ dd {
 	border-color: #666666;
 	border-style: solid;
 	border-width: 1px;
+}
+
+#countdown {
+	color: #804000;
 }
 
 

@@ -37,11 +37,12 @@
 <div id="page">
 
 <div id="page-header">
-<h1 class="all-header-text"><a href="index.php">Elizabeth and Matthew</a></h1>
+<h1 class="all-header-text"><a href="index.php"><img src="images/banner.png"></a></h1>
 <ul id="nav">
 <? emitNavItem("info.php", "Info"); ?>
 <? emitNavItem("about.php", "About Us"); ?>
 <? emitNavItem("photos.php", "Photos"); ?>
+<? emitNavItem("contact.php", "Contact"); ?>
 <li id="countdown" class="rightmost"><!-- Countdown text gets inserted here --></li>
 </ul>
 </div>
