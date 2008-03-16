@@ -200,4 +200,14 @@ dd {
 	color: #804000;
 }
 
+.italic-title {
+	padding-right: 1em;
+	margin-bottom: -1.5ex;
+	margin-top: -2ex;
+	font-size: 9pt;
+	text-align: right;
+	color: #804000;
+	font-style: italic;
+}
+
 
