@@ -1,7 +1,11 @@
 <? include("header.inc"); ?>
 
-<!-- <p class="single-image">
-<a href="us.png" title="Aren't we cute?" class="thickbox"><img src="us-thumb.png" width="200" height="150" alt="Us"></a>
-</p> -->
+<dl class="fancy-images">
+
+<dd>
+<p>
+<? /* fancyImage("filename.jpg", "The Caption Goes Here", thumbnail-width, thumbnail-height); */ ?>
+<? fancyImage("us.png", "Matthew and Liz - Thanksgiving 2006.", 200, 150); ?>
+</p></dd>
 
 <? include("footer.inc"); ?>
