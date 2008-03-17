@@ -4,11 +4,14 @@
 <dt id="how-we-met"><span class="header-text all-header-text">How We Met</span></dt>
 <dd>
 <p>
-We were both undergraduate students in the computer science department at Brandeis, but in a valiant attempt to break the tradition on both sides of the family of meeting one&rsquo;s spouse in school, we almost managed to finish our collegiate careers without speaking to one another.
+We were both Computer Science students at Brandeis, but we almost managed to finish our collegiate careers without meeting (and thwart both families' tradition of meeting spouses in school.) We'd had a few classes together, but never really spoke to each other.  That summer, we ran into each other a few times at parties and social gatherings with mutual friends, and eventually decided to meet up to see the <a href="http://web.mit.edu/museum/">MIT museum</a>, since the summer had gotten sort of long and boring.
 </p>
 
-<h3><span class="subheader-text all-header-text">Volun tatis pecatta mundi</span></h3>
-<p>Quod sic ergo sic hoc promptor hoc.</p>
+<p>
+After discovering that we had been able to make the day at the museum far from boring, we went out a few more times before Matthew left Boston for close to a month of family vacation and business trip. During that time, we continued to get to know each other &ldquo;the old-fashioned way&rdquo; &mdash; by letter. We wrote back and forth in emails of epic length, and resolved to get together again as soon as Matthew returned from his travels. Soon we found ourselves booking tickets to visit the Sachs family at Thanksgiving, and the Gifford family at Christmas. Over the next six months, they both finished their Masters&rsquo; and took jobs in Boston.</p>
+
+<p>Soon, decisions about careers turned to more personal decisions, and an engagement soon followed. We decided give each other coordinating engagement rings; we felt that for us, purchasing rings for each other and both wearing them rather than the traditional single engagement ring was a good symbol of the equal partnership we hope to share for a very long time.
+</p>
 </dd>
 
 
