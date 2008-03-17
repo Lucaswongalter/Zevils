@@ -172,6 +172,8 @@ a:visited {
 }
 
 p {
+	margin-right: 1em;
+	margin-left: 2em;
 	margin-bottom: 1ex;
 }
 
@@ -202,9 +204,11 @@ dd {
 }
 
 dl.inline-dl dt {
+    color: #804000;
+    margin-left: 2em;
     float: left;
     font-weight: bold;
-    margin-right: 1ex;
+    margin-right: 1em;
 }
 
 dl.inline-dl dd {
@@ -235,5 +239,4 @@ dl.inline-dl dd {
 	color: #804000;
 	font-style: italic;
 }
-
 

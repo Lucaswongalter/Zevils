@@ -3,9 +3,8 @@
 <h2 class="bar-header header-text all-header-text">Email Addresses</h2>
 
 <p>
-The address at the bottom of the page goes to both Liz and Matthew.
-Here are everyone's direct email addresses if you're looking to reach
-someone in particular.
+The address at the bottom of the page goes to both Liz and Matthew.</p>
+<p>To email any of us directly, you can use the following email addresses. (Click the desired address to open a new email.)
 </p>
 
 <dl class="inline-dl">

@@ -15,12 +15,13 @@
     }
     
     function fancyImage($file, $caption, $width, $height) {
-    	$file = "images/$file";
-		$thumb = preg_replace('/\.([a-z]+)$/', '-thumb.\1', $file);
-		if(!file_exists($thumb)) $thumb = $file;
+    	$full = "images/$file";
+    	$thumb = "images/thumbnails/$file";
+		$thumb = preg_replace('/\.([a-z]+)$/', '_thumb.\1', $thumb);
+		if(!file_exists($thumb)) $thumb = $full;
 
     	printf('<a href="%s" title="%s" class="thickbox"><img src="%s" width="%d" height="%d" alt="%s" title="%s"></a>',
-    		$file, $caption, $thumb, $width, $height, $caption, $caption);
+    		$full, $caption, $thumb, $width, $height, $caption, $caption);
     }
     
     function emitCountdownText() {
