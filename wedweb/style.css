@@ -74,6 +74,15 @@ dl.glidey > dt {
 	font-size: large;
 }
 
+dl.glidey > dt a:link, dl.glidey > dt a:visited, dl.glidey > dt a:active {
+    text-decoration: none;
+	color: #0a9ee5;
+}
+
+dl.glidey > dt a:hover {
+    text-decoration: underline;
+}
+
 .header-text {
 	padding-bottom: .25ex;
 	padding-top: .25ex;
@@ -92,6 +101,10 @@ h3 {
 }
 
 // Spans
+
+.phone {
+    font-weight: bold;
+}
 
 .date {
 	font-weight: bold;
@@ -173,7 +186,7 @@ dd {
 	text-align: center;
 }
 
-.fancy-images dt {
+.bar-header {
 	color: #804000;
 	margin-bottom: 1ex;
 	margin-top: 2ex;
@@ -184,6 +197,16 @@ dd {
 	border-bottom-width: 1px;
 	border-top-width: 1px;
 	text-align: center;
+}
+
+dl.inline-dl dt {
+    float: left;
+    font-weight: bold;
+    margin-right: 1ex;
+}
+
+dl.inline-dl dd {
+    margin-bottom: .5em;
 }
 
 .fancy-images img {
@@ -198,6 +221,7 @@ dd {
 
 #countdown {
 	color: #804000;
+	font-style: italic;
 }
 
 .italic-title {
