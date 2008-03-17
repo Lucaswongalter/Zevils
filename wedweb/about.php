@@ -30,12 +30,15 @@ After discovering that we had been able to make the day at the museum far from b
 
 <dt id="matthew"><span class="header-text all-header-text">Matthew</span></dt>
 <dd>
-<p>The Hyatt Harborside is conveniently located by Boston&rsquo;s Logan International Airport, which is easy to get to from I-90,
-or the MBTA&rsquo;s Silver and Blue Lines.  The hotel provides a free shuttle from the airport; call
-<span class="phone">(617) 568-1234</span> for pick-up.
-<a href="http://harborside.hyatt.com/hyatt/hotels/services/maps/index.jsp?icamp=propMapDirections">Detailed directions</a> are
-available on the hotel&rsquo;s website.</p>
-</dd>
+<p>
+<a href="http://zevils.com/">Matthew</a> grew up on Long Island.  His nursery did double duty as his father&rsquo;s computer room, and his parents serenaded him with Weird Al.  This probably explains quite a bit.
+</p><p>
+During high school, he took a job which involved viewing the medical records of millions of people who died of cancer and fulfilling a court order to send out large amounts of unsolicited email.  He also spent some time in the theatre, planing to fall back on acting if the computer thing didn&rsquo;t work out.  He also dabbled in Model UN, where on a conference in St. Petersburg, Russia, he was assigned to the representative to the Legal Committee from the Russian Federation.  He received a commemorative keychain for his efforts.
+</p><p>
+At Brandeis, he created a system so that the entire campus could be serenaded by his mother every morning, and picked up a BA and MS in Computer Science along the way.  During school, he interned for Apple Computer in San Francisco (this involved airplanes during the summer and email during the school year); upon graduation, he decided that snow was way better than fog, and took a job with ITA Software.
+</p><p>
+Luckily for everyone, Tabi is easily bribed with a little cat-nip and a feather on a stick, and has consented to tolerate Matthew.
+</p></dd>
 
 
 <dt id="giffords"><span class="header-text all-header-text">Meet the Giffords</span></dt>
