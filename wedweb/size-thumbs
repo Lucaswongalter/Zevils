@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use File::Copy;
+use File::Basename;
+
+our $SUCCESS = 0;
+END {
+  if(!$SUCCESS and -f "photos.php.bak") {
+    move("photos.php.bak", "photos.php")
+      or warn "Couldn't restore photos.php from photos.php.bak: $!\n";
+  }
+}
+
+die "imagemagick not found!\n" unless -x "$ENV{SW}/bin/identify";
+move("photos.php", "photos.php.bak") or die "Couldn't move photos.php: $!\n";
+open(PHOTOS, "photos.php.bak") or die "Couldn't open photos.php.bak: $!\n";
+open(OUT, ">", "photos.php") or die "Couldn't open photos.php: $!\n";
+while(<PHOTOS>) {
+  s^
+    (\bfancyImage\(")  # $1: fancyImage("
+    (.*?)(".*?,\s) # $2: filename; $3: caption
+    (\d+)(,\s) # $4: width; $5: ", "
+    (\d+)(\);) # $6: height; $7: ");"
+  ^
+    my($pre, $file, $mid, $width, $between, $height, $post) =
+      ($1, $2, $3, $4, $5, $6, $7);
+    my $thumb = "images/thumbnails/".basename($file, ".jpg")."_thumb.jpg";
+    if(-f $thumb) {
+      open(IDENTIFY, "-|", "$ENV{SW}/bin/identify", $thumb)
+        or die "Couldn't open identify: $!\n";
+      my $data = <IDENTIFY>;
+      close(IDENTIFY) or die "identify failed: $!\n";
+
+      $data =~ / (\d+)x(\d+) /;
+      ($width, $height) = ($1, $2);
+      warn "Got ${width}x${height} for $thumb\n";
+    }
+    $pre.$file.$mid.$width.$between.$height.$post;
+  ^xe;
+  print OUT $_;
+}
+
+$SUCCESS = 1;
