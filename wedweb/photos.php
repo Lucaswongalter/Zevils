@@ -34,6 +34,7 @@
 <? fancyImage("giffords_orlando.jpg", "The Giffords visit Grandma and Grandpa in Orlando (2002): (back row) Russ (grandfather), Alex (brother), Dave (dad), Jean (mom); (front row) Liz, Joan (grandmother), Isaac (brother).", 200, 150); ?>
 <? fancyImage("totem.jpg", "Dave, Jean and Isaac mimicing the totem poles in Victoria, BC.", 200, 150); ?>
 <? fancyImage("gandgGifford.jpg", "Russ and Joan celebrating Joan's birthday.", 200, 150); ?>
+<? fancyImage("AlexandersCoffee.jpg", "Paul and Marilynne enjoy coffee in the North End of Boston while visiting Liz in 2004.", 200, 150); ?>
 <? fancyImage("GcatsTower.jpg", "Sushi and Pandora grudgingly share their cat condo.", 200, 150); ?>
 <? fancyImage("mauandmoosh.jpg", "Pandora and Sushi claim the human furniture.", 200, 150); ?>
 <? fancyImage("birdbath.jpg", "Giffords visit Grandma and Grandpa in Colorado.", 200, 150); ?>
