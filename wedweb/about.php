@@ -1,7 +1,7 @@
 <? include("header.inc"); ?>
 <dl class="glidey">
 
-<dt><span class="header-text all-header-text">How We Met</span></dt>
+<dt id="how-we-met"><span class="header-text all-header-text">How We Met</span></dt>
 <dd>
 <p>
 We were both undergraduate students in the computer science department at Brandeis, but in a valiant attempt to break the tradition on both sides of the family of meeting one&rsquo;s spouse in school, we almost managed to finish our collegiate careers without speaking to one another.
@@ -12,7 +12,7 @@ We were both undergraduate students in the computer science department at Brande
 </dd>
 
 
-<dt><span class="header-text all-header-text">Liz</span></dt>
+<dt id="liz"><span class="header-text all-header-text">Liz</span></dt>
 <dd>
 <p>Liz was born in Silicon Valley, and lived with her parents for a short time in California and Minnesota  before settling in Texas for about 15 years.  Despite the lengthy duration in Texas, she still harbors love for technology and snow that undoubtably stem from the brief stints in other states.  She did acquire a great love for Tex-Mex over the years, but never managed to pick up a Southern accent, so you probably wouldn&rsquo;t guess where she grew up from talking to her!</p>
 
@@ -25,7 +25,7 @@ We were both undergraduate students in the computer science department at Brande
 </dd>
 
 
-<dt><span class="header-text all-header-text">Matthew</span></dt>
+<dt id="matthew"><span class="header-text all-header-text">Matthew</span></dt>
 <dd>
 <p>The Hyatt Harborside is conveniently located by Boston&rsquo;s Logan International Airport, which is easy to get to from I-90,
 or the MBTA&rsquo;s Silver and Blue Lines.  The hotel provides a free shuttle from the airport; call
@@ -35,7 +35,7 @@ available on the hotel&rsquo;s website.</p>
 </dd>
 
 
-<dt><span class="header-text all-header-text">Meet the Giffords</span></dt>
+<dt id="giffords"><span class="header-text all-header-text">Meet the Giffords</span></dt>
 <dd>
 <p>
 Elizabeth&rsquo;s parents are Dave and Jean; her brothers are Alexander (Alex)  and Isaac.  Dave grew up in a military family, living in South Carolina, Germany and Florida before settling in the eastern suburbs of Denver, Colorado.  Jean grew up in the western Denver suburbs.  When it came time for college, the red tile roofs of the University of Colorado beckoned and Dave and Jean met over circuit theory class notes that turned into something just a little bit more.  After graduation, Silicon Valley offered jobs and a change of scenery.  Jean and Dave were married in August of 1982.</p>
@@ -58,7 +58,7 @@ Elizabeth&rsquo;s parents are Dave and Jean; her brothers are Alexander (Alex)  
 </dd>
 
 
-<dt><span class="header-text all-header-text">Meet the Sachses</span></dt>
+<dt id="sachses"><span class="header-text all-header-text">Meet the Sachses</span></dt>
 <dd>
 <p>
 Matthew&rsquo;s proud parents are Randi and Danny Sachs and his equally proud brothers are Evan and Jeffrey. Randi and Danny met in college at the State University of New York (SUNY) at Albany when Randi was just a freshman and Danny was a senior. They met at a party and soon became inseparable.  Four years later shortly after Randi graduated from NYU (where she had transferred to be closer to Danny and also to study journalism) they were married. The date was August 19, 1978.</p>

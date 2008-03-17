@@ -187,6 +187,8 @@ dd {
 }
 
 .bar-header {
+    font-size: medium;
+    font-weight: normal;
 	color: #804000;
 	margin-bottom: 1ex;
 	margin-top: 2ex;

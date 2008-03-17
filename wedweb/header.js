@@ -32,17 +32,18 @@ $(document).ready(function() {
         $("dl.glidey > dd:not(:first)").hide();
     }
     $("dl.glidey > dt").each(function() {
-        var glideID = $(this).attr("id");
-        if(!glideID) glideID = "";
-        $(this).wrapInner("<a href=\"#" + glideID + "\">");
+        var glideeID = $(this).attr("id");
+        if(!glideeID) glideeID = "";
+        $(this).wrapInner("<a href=\"#" + glideeID + "\">");
 
         var glidee = $(this).next();
-        $(this).children("a").click(function(){
+        $(this).click(function(){
             if(!glidee.is(":visible")) {
                 $("dl.glidey > dd:visible").slideUp();
                 glidee.slideDown();
             }
-            return true;
+            window.location.hash = glideeID;
+            return false;
         });
     });
 });
