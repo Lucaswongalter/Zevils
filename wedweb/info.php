@@ -4,7 +4,7 @@
 <dt id="about-wedding"><span class="header-text all-header-text">About Our Wedding</span></dt>
 <dd>
 <p>
-The ceremony and reception will take place on the afternoon of
+The ceremony and reception will take place on the evening of
 <span class="date">Sunday, October 12<sup>th</sup>, 2008</span> (the Sunday before Columbus Day)
 at <span class="location"><a href="http://harborside.hyatt.com/">the Hyatt Harborside</a></span>
 in Boston, Massachusetts.
