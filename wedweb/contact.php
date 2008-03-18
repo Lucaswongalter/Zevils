@@ -26,7 +26,6 @@ The address at the bottom of the page goes to both Liz and Matthew.</p>
 
 <dt>Daniel (father of the groom):</dt>
 <dd><span id="dan-email">dansachs AT panix DOT com</span></dd>
-</dd>
 
 </dl>
 <? include("footer.inc"); ?>
