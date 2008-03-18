@@ -1,10 +1,11 @@
 Options All -Indexes
-AddOutputFilterByType DEFLATE text/html text/plain text/xml text/javascript text/css application/x-javascript
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/javascript text/css application/x-javascript application/javascript
 
 ExpiresActive On
 ExpiresByType image/x-icon A2592000
 ExpiresByType text/javascript A3600
 ExpiresByType application/x-javascript A3600
+ExpiresByType application/javascript A3600
 ExpiresByType text/css A3600
 ExpiresByType image/gif A604800
 ExpiresByType image/png A604800

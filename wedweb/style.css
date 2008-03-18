@@ -10,6 +10,10 @@ html,body {
 	background-color: #cc6600;
 }
 
+img {
+    border: none;
+}
+
 #page {
 	/* Getting the middle column to take up the entire
 	   height of the browser window, even if there isn't
