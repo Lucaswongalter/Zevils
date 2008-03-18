@@ -10,7 +10,7 @@ We were both Computer Science students at Brandeis, but we almost managed to fin
 <p>
 After discovering that we had been able to make the day at the museum far from boring, we went out a few more times before Matthew left Boston for close to a month of family vacation and business travel. During that time, we continued to get to know each other &ldquo;the old-fashioned way&rdquo; &mdash; by letter. We wrote back and forth in emails of epic length, and resolved to get together again as soon as Matthew returned from his travels. Soon we found ourselves booking tickets to visit the Sachs family at Thanksgiving, and the Gifford family at Christmas. Over the next six months, we both finished our Masters&rsquo; and took jobs in Boston.</p>
 
-<p>Soon, decisions about careers turned to more personal decisions, and an engagement soon followed. We decided give each other coordinating engagement rings; we felt that for us, purchasing rings for each other and both wearing them rather than the traditional single engagement ring was a good symbol of the equal partnership we hope to share for a very long time.
+<p>Soon, decisions about careers turned to more personal decisions, and an engagement soon followed. We decided to give each other coordinating engagement rings; we felt that for us, purchasing rings for each other and both wearing them rather than the traditional single engagement ring was a good symbol of the equal partnership we hope to share for a very long time.
 </p>
 </dd>
 
