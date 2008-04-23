@@ -2,14 +2,29 @@
 <html lang="en">
 <?
     $WEBPAGE_FILE = basename($_SERVER["REQUEST_URI"]);
+    $NAV_ITEMS =
+        array(
+            array("page" => "info.php", "title" => "Info"),
+            array("page" => "about.php", "title" => "About Us"),
+            array("page" => "photos.php", "title" => "Photos"),
+            array("page" => "contact.php", "title" => "Contact")
+            //array("page" => "registries.php", "title" => "Charities and Registries")
+        );
+    $CURRENT_NAV_ITEM = null;
+    foreach($NAV_ITEMS as $navItem) {
+        if($navItem["page"] == $WEBPAGE_FILE) {
+            $CURRENT_NAV_ITEM = $navItem;
+            break;
+        }
+    }
 
-    function emitNavItem($filename, $title) {
-        global $WEBPAGE_FILE;
+    function emitNavItem($item) {
+        global $CURRENT_NAV_ITEM;
         echo '<li';
-        if($WEBPAGE_FILE == $filename) {
-            echo ' id="nav-selected">' . $title;
+        if($item == $CURRENT_NAV_ITEM) {
+            printf(' id="nav-selected">%s', $item["title"]);
         } else {
-            echo '><a href="' . $filename . '">' . $title . '</a>';
+            printf('><a href="%s">%s</a>', $item["page"], $item["title"]);
         }
         echo '</li>';
     }
@@ -42,7 +57,13 @@
 ?>
 <head>
     <meta charset="UTF-8">
-    <title>Gifford-Sachs Wedding</title>
+    <title><?
+        if($CURRENT_NAV_ITEM) {
+            printf("%s (Gifford-Sachs Wedding)", $CURRENT_NAV_ITEM["title"]);
+        } else {
+            echo "Gifford-Sachs Wedding";
+        }
+    ?></title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="thickbox.css" type="text/css" media="screen">
     <link rel="stylesheet" href="style.css" type="text/css" media="screen">
@@ -59,10 +80,9 @@
 <div id="page-header">
 <h1 class="all-header-text"><a href="index.php"><img src="images/banner.png"></a></h1>
 <ul id="nav">
-<? emitNavItem("info.php", "Info"); ?>
-<? emitNavItem("about.php", "About Us"); ?>
-<? emitNavItem("photos.php", "Photos"); ?>
-<? emitNavItem("contact.php", "Contact"); ?>
+<? foreach($NAV_ITEMS as $navItem) {
+    emitNavItem($navItem);
+} ?>
 <li id="countdown" class="rightmost"><? emitCountdownText(); ?></li>
 </ul>
 </div>
