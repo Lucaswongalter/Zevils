@@ -1,0 +1,59 @@
+is_admin => True/False
+is_guest => True/False
+success => True/False
+action:
+  "admin_auth"
+    error => "badpass", "nopass"
+  "guest_auth"
+    error => "notfound", "nocreds"
+    gotmulti => True/False
+    candidates => ["id" => id, "names" => [name]]
+  "display_group"
+    error => "noinput", "nopriv", "nogroup"
+    meal_options = [[id, name]]
+    group_street => "Horatio"
+    guests => [id => id, name => name, attending => bool, meal => id/False]
+  "grouplist"
+    error => "nopriv"
+    groups => ["id" => id, "street" => street, "guests" => as per display_group]
+    attendee_count => N
+    invitee_count => N
+
+logout:
+admin_auth:
+  POST: "admin_pass"
+guest_auth:
+  /group_id
+  GET: street_name, last_name
+group:
+  /group_id
+grouplist:
+edit_group:
+  
+
+#admin_text
+  #admin_logout
+  #admin_show_grouplist
+#admin_auth
+  .wrsvp_error
+  #admin_auth_form
+  #admin_pass
+#guest_auth
+  .wrsvp_error
+  #guest_auth_form
+  #guest_auth_last_name
+  #guest_auth_street_name
+#guest_multi
+  .wrsvp_auth_guest_multi
+  #guest_multi_retry
+#group
+  .wrsvp_error
+  #group_street
+  #group_edit_form
+  .guest / guest_N
+    .guest_name
+    .guest_attending
+    .guest_meal
+  #edit_group_submit
+#grouplist
+  .grouplist_multi / #grouplist_multi_N

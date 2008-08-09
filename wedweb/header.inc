@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <?
-   global $RSRC_BASE;
-
-    $WEBPAGE_FILE = basename($_SERVER["REQUEST_URI"]);
-    if(!$RSRC_BASE) $RSRC_BASE = "";
+    $WEBPAGE_FILE = preg_replace("/[?].*/", "", basename($_SERVER["REQUEST_URI"]));
     $NAV_ITEMS =
         array(
-            array("page" => $RSRC_BASE."info.php", "title" => "Info"),
-            array("page" => $RSRC_BASE."about.php", "title" => "About Us"),
-            array("page" => $RSRC_BASE."photos.php", "title" => "Photos"),
-            array("page" => $RSRC_BASE."contact.php", "title" => "Contact"),
-            array("page" => $RSRC_BASE."registries.php", "title" => "Charities and Registries")
+            array("page" => "info.php", "title" => "Info"),
+            array("page" => "about.php", "title" => "About Us"),
+            array("page" => "photos.php", "title" => "Photos"),
+            array("page" => "contact.php", "title" => "Contact"),
+            array("page" => "registries.php", "title" => "Charities and Registries"),
+            array("page" => "rsvp.php", "title" => "RSVP")
         );
     $CURRENT_NAV_ITEM = null;
     foreach($NAV_ITEMS as $navItem) {
@@ -23,11 +21,12 @@
 
     function emitNavItem($item) {
         global $CURRENT_NAV_ITEM;
+        global $RSRC_BASE;
         echo '<li';
         if($item == $CURRENT_NAV_ITEM) {
             printf(' id="nav-selected">%s', $item["title"]);
         } else {
-            printf('><a href="%s">%s</a>', $item["page"], $item["title"]);
+            printf('><a href="%s">%s</a>', $RSRC_BASE . $item["page"], $item["title"]);
         }
         echo '</li>';
     }
@@ -72,9 +71,14 @@
     <link rel="stylesheet" href="<? echo $RSRC_BASE; ?>style.css" type="text/css" media="screen">
     <script type="text/javascript"><!--
         var WEBPAGE_FILE = "<? echo $WEBPAGE_FILE; ?>";
+        var RSRC_BASE = "<? echo $RSRC_BASE; ?>";
     //--></script>
     <script src="<? echo $RSRC_BASE; ?>jquery-1.2.3.min.js" type="text/javascript"></script>
     <script src="<? echo $RSRC_BASE; ?>thickbox-compressed.js" type="text/javascript"></script>
+    <? if($WEBPAGE_FILE == "rsvp.php") { ?>
+      <script src="<? echo $RSRC_BASE; ?>trimpath-template.js" type="text/javascript"></script>
+      <script src="<? echo $RSRC_BASE; ?>rsvp-client.js" type="text/javascript"></script>
+    <? } ?>
     <script src="<? echo $RSRC_BASE; ?>header.js" type="text/javascript"></script>
 </head>
 <body>
