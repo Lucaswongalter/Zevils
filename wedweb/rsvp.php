@@ -64,7 +64,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
   {if IS_ADMIN}<p>Street Name: <input type="text" length="20" id="group_street" value="${RSVP_DATA["group_street"]}"></p>
   <p>Guests:</p>{/if}
   <table class="wrsvp_form">
-  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Attending Rehearsal Dessert Party?</th>{/if}<th>Attending Reception?</th><th>Meal</th></tr>{for guest in RSVP_DATA["guests"]}
+  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Attending Rehearsal Dessert Party?</th>{/if}<th>Attending Wedding?</th><th>Meal</th></tr>{for guest in RSVP_DATA["guests"]}
     <tr class="guest" id="guest_${guest["id"]}">
     <td class="guest_name">${guest["name"]}</td>
     {if RSVP_DATA["dessert_invite"]}
@@ -75,9 +75,9 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     </select></td>
     {/if}
     <td><select class="guest_attending">
-      <option value=""{if guest["attending"] == ""} selected{/if}>No Response for Reception</option>
-      <option value="0"{if guest["attending"] == "0"} selected{/if}>Not Attending Reception</option>
-      <option value="1"{if guest["attending"] == "1"} selected{/if}>Attending Reception</option>
+      <option value=""{if guest["attending"] == ""} selected{/if}>No Response for Wedding</option>
+      <option value="0"{if guest["attending"] == "0"} selected{/if}>Not Attending Wedding</option>
+      <option value="1"{if guest["attending"] == "1"} selected{/if}>Attending Wedding</option>
     </select></td>
     <td><select class="guest_meal">
       <option value=""{if !guest["meal"]} selected{/if}>No Selection</option>{for meal in RSVP_DATA["meal_options"]}
