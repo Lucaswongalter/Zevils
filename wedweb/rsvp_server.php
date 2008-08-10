@@ -192,8 +192,11 @@ function init_session($id = Null, $destroy = Null) {
 }
 
 function check_session() {
+  global $SESSION_ID;
+
   if($_COOKIE["wrsvp_session"]) {
     init_session($_COOKIE["wrsvp_session"]);
+    setcookie("wrsvp_session", $SESSION_ID, time() + 60*60*24*365);
   }
 }
 
