@@ -33,7 +33,9 @@ function error_message(data) {
 }
 
 function extract_id(id) {
-    return /^[-a-zA_Z_]+_([0-9]+)/(id)[1];
+    var re = new RegExp("^[-a-zA_Z_]+_([0-9]+)");
+    var matches = re.exec(id);
+    return matches[1];
 }
 
 function check_rsvp_data() {

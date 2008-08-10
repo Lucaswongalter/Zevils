@@ -1,6 +1,6 @@
 <? 
 
-  if($_SERVER["SERVER_NAME"] == "localhost") {
+  if($_SERVER["SERVER_NAME"] == "localhost" or $_SERVER["SERVER_NAME"] == "192.168.1.193") {
     $RSRC_BASE = "/wedding/";
   } else {
     $RSRC_BASE = "/";
@@ -55,7 +55,6 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
 
 <div id="group" style="display: none" class="wrsvp_action wrsvp_text">
   <p class="wrsvp_error"></p>
-  <p class="wrsvp_success"></p>
   <p>If this is not the party that you'd like to RSVP for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
   <form method="POST" action="rsvp.php/edit_group" id="group_edit_form">
   </form>
@@ -95,7 +94,8 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     <div id="group_share_textarea"></div>
   </div>
   
-  <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Submit Changes"></p>
+  <p class="wrsvp_success"></p>
+  <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Submit Responses"></p>
 
   <h3><span class="subheader-text all-header-text">About the Entr&eacute;e Selections</span></h3>
   <dl class="wrsvp-dl">

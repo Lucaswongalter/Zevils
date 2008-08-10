@@ -171,39 +171,35 @@ function init_session($id = Null, $destroy = Null) {
   global $SESSION;
   global $SESSION_ID;
 
-  if($SESSION_ID and !$destroy) return;
-  
-  if($SESSION_ID) sql_do("DELETE FROM sessions WHERE session_id = '" .
-                         mysql_real_escape_string($SESSION_ID) .
-                         "'");
   if($destroy) {
+    sql_do("DELETE FROM sessions WHERE session_id = '" .
+           mysql_real_escape_string($SESSION_ID) .
+           "'");
     setcookie("wrsvp_session", "", time() - 42000, "/");
     $SESSION = array();
     return;
   }
   
   if($id) {
+    $SESSION_ID = $id;
     $data = sql_fetch_one("SELECT session_data FROM sessions WHERE session_id = '" .
                           mysql_real_escape_string($id) .
                           "'");
     if($data) {
       $SESSION = unserialize($data);
-      $SESSION_ID = $id;
-    } else {
-      setcookie("wrsvp_session", "", time() - 42000, "/");
-      $id = Null;
       return;
     }
   } else {
     $SESSION_ID = md5(uniqid(rand(), true));
-    $SESSION = array();
-    sql_do("INSERT INTO sessions(session_id, session_data) VALUES('" .
-           mysql_real_escape_string($SESSION_ID) .
-           "', '" .
-           mysql_real_escape_string(serialize($SESSION)) .
-           "')");
     setcookie("wrsvp_session", $SESSION_ID, time() + 60*60*24*365, "/");
   }
+
+  $SESSION = array();
+  sql_do("INSERT INTO sessions(session_id, session_data) VALUES('" .
+         mysql_real_escape_string($SESSION_ID) .
+         "', '" .
+         mysql_real_escape_string(serialize($SESSION)) .
+         "')");
 }
 
 function check_session() {
@@ -218,7 +214,7 @@ function set_session($key, $value) {
   global $SESSION;
   global $SESSION_ID;
 
-  if(!$SESSION_ID) init_session();
+  if(count($SESSION) == 0) init_session($SESSION_ID);
   
   $SESSION[$key] = $value;
   sql_do("UPDATE sessions SET session_data='" .
