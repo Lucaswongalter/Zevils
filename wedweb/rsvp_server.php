@@ -3,6 +3,14 @@
 $SESSION = array();
 $RET = array();
 
+function get_config_data($key) {
+  $uid = getmyuid();
+  $user_info = posix_getpwuid($uid);
+  $home = $user_info["dir"];
+  $data = json_decode(file_get_contents("$home/.wrsvp"), true);
+  return $data[$key];
+}
+
 function sql_do($query) {
   //global $RET;
   //if(!$RET["sql"]) $RET["sql"] = "";
@@ -57,11 +65,13 @@ function sql_fetch_all_hash($query) {
 
 function init_db() {
   global $DBH;
-  $DBH = mysql_connect("localhost", "root");
+
+  $dbconfig = get_config_data("dbconfig");
+  $DBH = mysql_connect($dbconfig["host"], $dbconfig["user"], $dbconfig["pass"]);
   if(!$DBH) {
     die("Couldn't connect: " . mysql_error());
   }
-  if(!mysql_select_db("wrsvp")) {
+  if(!mysql_select_db($dbconfig["db"])) {
     die("Couldn't select DB: " . mysql_error());
   }
 }
@@ -204,14 +214,6 @@ function set_session($key, $value) {
 function get_session($key) {
   global $SESSION;
   return $SESSION[$key];
-}
-
-function get_config_data($key) {
-  $uid = getmyuid();
-  $user_info = posix_getpwuid($uid);
-  $home = $user_info["dir"];
-  $data = json_decode(file_get_contents("$home/.wrsvp"), true);
-  return $data[$key];
 }
 
 function admin_pass() {

@@ -252,6 +252,20 @@ dl.inline-dl dd {
    font-weight: bold;
 }
 
+.wrsvp_text {
+   margin-left: 2em;
+   margin-right: 1em;
+}
+
+.wrsvp_text p {
+   margin-left: 0;
+   margin-right: 0;
+}
+
+.wrsvp-dl dt {
+   font-weight: bold;
+}
+
 #modal-overlay {
    text-align: center;
    width: 100%;
