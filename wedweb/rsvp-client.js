@@ -96,10 +96,10 @@ function fix_meal_picker_state() {
     var attending = $("#" + attr_id + " >> .guest_attending > option:selected").val();
  
     var meal_selector = $("#" + attr_id + " >> .guest_meal");
-    if(!attending)
-        meal_selector.attr("disabled", "disabled");
-    else
+    if(attending == "1")
         meal_selector.removeAttr("disabled");
+    else
+        meal_selector.attr("disabled", "disabled");
 }
 
 function fix_share_details_state() {
@@ -276,12 +276,12 @@ $(document).ready(function() {
             var meal = $("#" + attr_id + " >> .guest_meal > option:selected").val();
 
             guest_data = {"id": id,
-                          "attending": attending,
                           "meal": meal}
             var attending_dessert_option = $("#" + attr_id + " >> .guest_attending_dessert > option:selected");
+            if(attending != "") guest_data["attending"] = attending;
             if(attending_dessert_option) {
                 var val = attending_dessert_option.val();
-                if(val) guest_data["attending_dessert"] = val;
+                if(val && val != "") guest_data["attending_dessert"] = val;
             }
 
             data["guests"][data["guests"].length++] = guest_data;

@@ -69,13 +69,15 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     <td class="guest_name">${guest["name"]}</td>
     {if RSVP_DATA["dessert_invite"]}
     <td><select class="guest_attending_dessert">
-      <option value=""{if !guest["attending_dessert"]} selected{/if}>Not Attending Rehearsal Dessert Party</option>
-      <option value="true"{if guest["attending_dessert"]} selected{/if}>Attending Rehearsal Dessert Party</option>
+      <option value=""{if guest["attending_dessert"] == ""} selected{/if}>No Response for Rehearsal Dessert Party</option>
+      <option value="0"{if guest["attending_dessert"] == "0"} selected{/if}>Not Attending Rehearsal Dessert Party</option>
+      <option value="1"{if guest["attending_dessert"] == "1"} selected{/if}>Attending Rehearsal Dessert Party</option>
     </select></td>
     {/if}
     <td><select class="guest_attending">
-      <option value=""{if !guest["attending"]} selected{/if}>Not Attending Reception</option>
-      <option value="true"{if guest["attending"]} selected{/if}>Attending Reception</option>
+      <option value=""{if guest["attending"] == ""} selected{/if}>No Response for Reception</option>
+      <option value="0"{if guest["attending"] == "0"} selected{/if}>Not Attending Reception</option>
+      <option value="1"{if guest["attending"] == "1"} selected{/if}>Attending Reception</option>
     </select></td>
     <td><select class="guest_meal">
       <option value=""{if !guest["meal"]} selected{/if}>No Selection</option>{for meal in RSVP_DATA["meal_options"]}
@@ -120,7 +122,9 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
 </div>
 <textarea id="grouplist_template" style="display: none">
   <ul>
+    <li>Number responded: ${RSVP_DATA["response_count"]} / ${RSVP_DATA["invitee_count"]}</li>
     <li>Number attending: ${RSVP_DATA["attendee_count"]} / ${RSVP_DATA["invitee_count"]}</li>
+    <li>Number responded for rehearsal dessert: ${RSVP_DATA["dessert_response_count"]} / ${RSVP_DATA["dessert_invitee_count"]}</li>
     <li>Number attending rehearsal dessert: ${RSVP_DATA["dessert_attendee_count"]} / ${RSVP_DATA["dessert_invitee_count"]}</li>
     <li>Meal counts:
       <ul>{for meal in RSVP_DATA["meals"]}
@@ -133,9 +137,9 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
         <li><a href="rsvp.php/group/edit" class="grouplist_multi" id="grouplist_multi_${group["id"]}">${group["street"]}</a>:
           ({if !group["dessert_invite"]}<b>NOT&nbsp;</b>{/if}invited to dessert):
           <ul>{for guest in group["guests"]}
-            <li>${guest["name"]},&nbsp;{if !guest["attending"]}<b>NOT</b>&nbsp;{/if}attending,&nbsp;
+            <li>${guest["name"]},&nbsp;{if guest["attending"] == ""}<b>???</b>&nbsp;{elseif guest["attending"] == "0"}<b>NOT</b>&nbsp;{/if}attending,&nbsp;
               {if group["dessert_invite"]}
-                {if !guest["attending_dessert"]}<b>NOT</b>&nbsp;{/if}attending dessert,&nbsp;
+                {if guest["attending_dessert"] == ""}<b>???</b>&nbsp;{elseif guest["attending_dessert"] == "0"}<b>NOT</b>&nbsp;{/if}attending dessert,&nbsp;
               {/if}
               ${guest["meal"]|default:"no meal selection"}</li>{/for}
         </ul></li>{/for}

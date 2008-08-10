@@ -11,6 +11,15 @@ function get_config_data($key) {
   return $data[$key];
 }
 
+function db_bool_to_php($val) {
+  if(!isset($val))
+    return NULL;
+  else if(0+$val == 0)
+    return "0";
+  else if(0+$val == 1)
+    return "1";
+}
+
 function sql_do($query) {
   //global $RET;
   //if(!$RET["sql"]) $RET["sql"] = "";
@@ -94,28 +103,27 @@ function transform_guests_for_ret($people, $meal_names = false) {
 
   $ret_guests = array();
   foreach($people as $guest) {
-    if($guest["attending"]) {
-      $attending_bool = True;
-    } else {
-      $attending_bool = False;
-    }
-
-    if($guest["attending_dessert"]) {
-      $attending_dessert_bool = True;
-    } else {
-      $attending_dessert_bool = False;
-    }
+    $attending = db_bool_to_php($guest["attending"]);
+    $attending_dessert = db_bool_to_php($guest["attending"]);
 
     if($meal_names and $guest["meal"]) {
       $meal = $meal_map[$guest["meal"]];
     } else {
       $meal = $guest["meal"];
     }
-    $ret_guests[] = array("id" => $guest["person_id"],
-                          "name" => $guest["name"],
-                          "attending" => $attending_bool,
-                          "attending_dessert" => $attending_dessert_bool,
-                          "meal" => $meal);
+    $data = array("id" => $guest["person_id"],
+                  "name" => $guest["name"],
+                  "meal" => $meal);
+    if(!is_null($attending))
+      $data["attending"] = $attending;
+    else
+      $data["attending"] = "";
+    if(!is_null($attending_dessert))
+      $data["attending_dessert"] = $attending_dessert;
+    else
+      $data["attending_dessert"] = "";
+
+    $ret_guests[] = $data;
   }
   return $ret_guests;
 }
@@ -366,8 +374,10 @@ function list_groups($path) {
 
   set_ret("success", True);
 
+  $response_total = 0;
   $yes_total = 0;
   $total = 0;
+  $dessert_response_total = 0;
   $dessert_yes_total = 0;
   $dessert_total = 0;
   $ret_groups = array();
@@ -395,26 +405,36 @@ function list_groups($path) {
                           "guests" => transform_guests_for_ret($guests, true));
     foreach($guests as $guest) {
       $total++;
-      if($guest["attending"]) {
-        $yes_total++;
+      $attending = db_bool_to_php($guest["attending"]);
+      $attending_dessert = db_bool_to_php($guest["attending_dessert"]);
+      if(!is_null($attending)) {
+        $response_total++;
+        if($attending == "1") {
+          $yes_total++;
 
-        if($guest["meal"]) {
-          $meal_name = $meal_map[$guest["meal"]];
-        } else {
-          $meal_name = $meals_ret[0];
+          if($guest["meal"]) {
+            $meal_name = $meal_map[$guest["meal"]];
+          } else {
+            $meal_name = $meals_ret[0];
+          }
+          $meal_counts[$meal_name]++;
         }
-        $meal_counts[$meal_name]++;
       }
 
       if($dessert_invite) {
         $dessert_total++;
-        if($guest["attending_dessert"]) $dessert_yes_total++;
+        if(!is_null($attending_dessert)) {
+          $dessert_response_total++;
+          if($attending_dessert == "1") $dessert_yes_total++;
+        }
       }
     }
   }
   set_ret("groups", $ret_groups);
+  set_ret("response_count", $response_total);
   set_ret("attendee_count", $yes_total);
   set_ret("invitee_count", $total);
+  set_ret("dessert_response_count", $dessert_response_total);
   set_ret("dessert_attendee_count", $dessert_yes_total);
   set_ret("dessert_invitee_count", $dessert_total);
   set_ret("meals", $meals_ret);
@@ -478,28 +498,37 @@ function edit_group($path) {
   }
 
   foreach($data["guests"] as $guest) {
-      $attending_bool = 0;
+      $guest_attending = db_bool_to_php($guest["attending"]);
+      $guest_attending_dessert = db_bool_to_php($guest["attending_dessert"]);
+      if(is_null($guest_attending))
+        $guest_attending_raw = "NULL";
+      else
+        $guest_attending_raw = $guest_attending;
+      if(is_null($guest_attending_dessert))
+        $guest_attending_dessert_raw = "NULL";
+      else
+        $guest_attending_dessert_raw = $guest_attending;
       $attending_dessert_bool = 0;
       $meal_raw = "NULL";
       $guest_id = 0 + $guest["id"];
       $person = $people_map[$guest_id];
-      if($guest["attending"]) $attending_bool = 1;
-      if($guest["attending_dessert"]) $attending_dessert_bool = 1;
+      $data_attending = db_bool_to_php($person["attending"]);
+      $data_attending_dessert = db_bool_to_php($person["attending_dessert"]);
       if($guest["meal"]) $meal_raw = sprintf("%d", 0 + $guest["meal"]);
-      
-      sql_do("UPDATE people SET attending=$attending_bool, attending_dessert=$attending_dessert_bool, meal=$meal_raw WHERE person_id=$guest_id AND group_id=$group_id");
 
-      if($attending_bool != 0+$person["attending"]) {
+      sql_do("UPDATE people SET attending=$guest_attending_raw, attending_dessert=$guest_attending_dessert_raw, meal=$meal_raw WHERE person_id=$guest_id AND group_id=$group_id");
+
+      if($guest_attending != $data_attending) {
           $deltas[] = sprintf("<li>%s attending: %s &rarr; %s</li>",
                               htmlspecialchars($person["name"]),
-                              $person["attending"],
-                              $attending_bool);
+                              $data_attending,
+                              $guest_attending);
       }
-      if($attending_dessert_bool != 0+$person["attending_dessert"]) {
+      if($guest_attending_dessert != $data_attending_dessert) {
           $deltas[] = sprintf("<li>%s attending dessert: %s &rarr; %s</li>",
                               htmlspecialchars($person["name"]),
-                              $person["attending_dessert"],
-                              $attending_dessert_bool);
+                              $data_attending_dessert,
+                              $guest_attending_dessert);
       }
       if(($guest["meal"] and !$person["meal"]) or
          (!$guest["meal"] and $person["meal"]) or
@@ -550,18 +579,22 @@ function export_csv($path) {
             $meal = "";
         }
 
-        if($person["attending"]) {
-            $attending = "Y";
+        if(!isset($person["attending"])) {
+          $attending = "?";
+        } else if($person["attending"] == "0") {
+          $attending = "N";
         } else {
-            $attending = "N";
+          $attending = "Y";
         }
 
         if(!$person["rehearsal_dessert_invite"]) {
-            $attending_dessert = "U";
-        } else if($person["attending_dessert"]) {
-            $attending_dessert = "Y";
+          $attending_dessert = "U";
+        } else if(!isset($person["attending_dessert"])) {
+          $attending_dessert = "?";
+        } else if($person["attending_dessert"] == "0") {
+          $attending_dessert = "N";
         } else {
-            $attending_dessert = "N";
+          $attending_dessert = "Y";
         }
         
         printf("\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\n",
