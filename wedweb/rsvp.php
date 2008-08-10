@@ -69,7 +69,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     <td class="guest_name">${guest["name"]}</td>
     {if RSVP_DATA["dessert_invite"]}
     <td><select class="guest_attending_dessert">
-      <option value=""{if guest["attending_dessert"] == ""} selected{/if}>No Response for Dessert Party/option>
+      <option value=""{if guest["attending_dessert"] == ""} selected{/if}>No Response for Dessert Party</option>
       <option value="0"{if guest["attending_dessert"] == "0"} selected{/if}>Not Attending Dessert Party</option>
       <option value="1"{if guest["attending_dessert"] == "1"} selected{/if}>Attending Dessert Party</option>
     </select></td>
