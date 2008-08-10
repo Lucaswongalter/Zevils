@@ -298,7 +298,6 @@ function authenticate_guest($path = array()) {
     if($group_id) {
       $sql .= sprintf(" AND group_id=%d", $group_id);
     }
-    set_ret("sql", $sql);
     $candidates = sql_fetch_all_hash($sql);
     $groups = array();
     $group_people = array();
