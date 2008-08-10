@@ -381,7 +381,7 @@ function list_groups($path) {
   $dessert_yes_total = 0;
   $dessert_total = 0;
   $ret_groups = array();
-  $groups = sql_fetch_all_hash("SELECT * FROM groups ORDER BY group_id");
+  $groups = sql_fetch_all_hash("SELECT * FROM groups ORDER BY street_name, group_id");
 
   $meal_counts = array();
   $meals = sql_fetch_all_hash("SELECT * FROM meals ORDER BY name");
