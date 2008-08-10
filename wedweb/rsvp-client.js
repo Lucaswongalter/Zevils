@@ -266,6 +266,7 @@ $(document).ready(function() {
 
     $("#group_edit_form").submit(function() {
         var data = {};
+        $("#group .wrsvp_success").text("");
         show_progress();
         if(IS_ADMIN) data["street"] = $("#group_street").val();
         data["wants_share"] = $("#group_wants_share > option:selected").val();
