@@ -81,16 +81,19 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
   <h3><span class="subheader-text all-header-text">About the Entr&eacute;e Selections</span></h3>
   <dl class="wrsvp-dl">
     <dt>Basil and Pine Nut-Crusted Sea Bass:</dt>
-    <dd>Lorem ipsum dolor sic amet.</dd>
+    <dd>Basil and pine nut-crusted sea bass atop saffron orzo risotto,
+    roasted tomato sauce.</dd>
 
     <dt>Entree TBD:</dt>
     <dd>Consectetur adipsicing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.</dd>
 
     <dt>Mediterranean Vegetable Purse:</dt>
-    <dd>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
+    <dd>Couscous and fresh vegetables in phyllo over fire-roasted red
+    pepper coulis.</dd>
 
     <dt>New York Sirloin:</dt>
-    <dd>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dd>
+    <dd>Grilled New York sirloin steak served with herb roasted
+    fingerling potatoes, caramelized cipollini, red wine jus.</dd>
   </dl>
   <p>If you have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.</span>
 
