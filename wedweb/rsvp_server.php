@@ -282,7 +282,10 @@ function authenticate_guest($path = array()) {
   } else {
     $norm_last_name = normalize_name($last_name);
     $norm_street_name = strtoupper($street_name);
-    $sql = sprintf("SELECT * FROM groups WHERE street_name='%s'",
+    $norm_street_name = preg_replace("/ (STREET|ST|PLACE|PL|AVE|AVENUE|DRIVE|DR|COURT|CT|EXPRESSWAY|EXPY|PARKWAY|PKWY|TURNPIKE|TPKE)\\.?$/", "", $norm_street_name);
+    
+    $sql = sprintf("SELECT * FROM groups WHERE street_name='%s' OR street_name LIKE '%%%s'",
+                   mysql_real_escape_string($norm_street_name),
                    mysql_real_escape_string($norm_street_name));
     if($group_id) {
       $sql .= sprintf(" AND group_id=%d", $group_id);

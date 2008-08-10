@@ -252,6 +252,11 @@ dl.inline-dl dd {
    font-weight: bold;
 }
 
+.wrsvp_success {
+   font-weight: bold;
+   color: black;
+}
+
 .wrsvp_text {
    margin-left: 2em;
    margin-right: 1em;

@@ -32,7 +32,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
 <p class="wrsvp_error"></p>
 <p>To respond to your invitation, please provide your <b>last name</b> and the
    <b>name of the street</b> to which your invitation was sent (for instance, if your
-   invitation was sent to <i>1600 Pennsylvania Ave.</i>, enter <i>Pennsylvania</i>.)</p>
+   invitation was sent to <i>1600 West Pennsylvania Ave.</i>, enter <i>Pennsylvania</i>.)</p>
 <form method="POST" action="rsvp.php/guest_auth" id="guest_auth_form"><table class="wrsvp_form">
   <tr><td>Last Name:</td><td><input type="text" name="last_name" id="guest_auth_last_name" length="30" value="<? echo urlencode($_POST["last_name"]); ?>"></td></tr>
   <tr><td>Street Name:</td><td><input type="text" name="street_name" id="guest_auth_street_name" length="30" value="<? echo urlencode($_POST["street_name"]); ?>"></td></tr>
@@ -55,6 +55,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
 
 <div id="group" style="display: none" class="wrsvp_action wrsvp_text">
   <p class="wrsvp_error"></p>
+  <p class="wrsvp_success"></p>
   <p>If this is not the party that you'd like to RSVP for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
   <form method="POST" action="rsvp.php/edit_group" id="group_edit_form">
   </form>

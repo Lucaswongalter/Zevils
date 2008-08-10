@@ -109,11 +109,13 @@ function fix_share_details_state() {
         $("#group_share_details").hide("normal");
 }
 
-function got_group(data) {
+function got_group(data, success_text) {
     RSVP_DATA = data;
     var result = TrimPath.processDOMTemplate("group_template", data);
     $("#group_edit_form").html(result);
     $("#group .wrsvp_error").text("");
+    if(!success_text) success_text = "";
+    $("#group .wrsvp_success").text(success_text);
 
     $("#group .guest_attending").each(fix_meal_picker_state);
     $("#group .guest_attending").change(fix_meal_picker_state);
@@ -298,7 +300,7 @@ $(document).ready(function() {
             "data": $.toJSON(data),
             "dataType": "json",
             "success": function(data) {
-                got_group(data);
+                got_group(data, "Responses submitted.  Thank you!");
             }});
         
         return false;
