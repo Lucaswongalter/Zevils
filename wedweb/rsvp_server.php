@@ -169,7 +169,7 @@ function init_session($id = Null, $destroy = Null) {
                          mysql_real_escape_string($SESSION_ID) .
                          "'");
   if($destroy) {
-    setcookie("wrsvp_session", "", time() - 3600);
+    setcookie("wrsvp_session", "", time() - 42000, "/");
     $SESSION = array();
     return;
   }
@@ -182,11 +182,11 @@ function init_session($id = Null, $destroy = Null) {
       $SESSION = unserialize($data);
       $SESSION_ID = $id;
     } else {
+      setcookie("wrsvp_session", "", time() - 42000, "/");
       $id = Null;
+      return;
     }
-  }
-
-  if(!$id) {
+  } else {
     $SESSION_ID = md5(uniqid(rand(), true));
     $SESSION = array();
     sql_do("INSERT INTO sessions(session_id, session_data) VALUES('" .
@@ -194,7 +194,7 @@ function init_session($id = Null, $destroy = Null) {
            "', '" .
            mysql_real_escape_string(serialize($SESSION)) .
            "')");
-    setcookie("wrsvp_session", $SESSION_ID, time() + 60*60*24*365);
+    setcookie("wrsvp_session", $SESSION_ID, time() + 60*60*24*365, "/");
   }
 }
 
@@ -203,7 +203,6 @@ function check_session() {
 
   if($_COOKIE["wrsvp_session"]) {
     init_session($_COOKIE["wrsvp_session"]);
-    setcookie("wrsvp_session", $SESSION_ID, time() + 60*60*24*365);
   }
 }
 
