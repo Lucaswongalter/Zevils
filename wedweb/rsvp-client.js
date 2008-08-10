@@ -91,11 +91,39 @@ function get_grouplist() {
     });
 }
 
+function fix_meal_picker_state() {
+    var attr_id = $(this).parents(".guest").attr("id");
+    var attending = $("#" + attr_id + " >> .guest_attending > option:selected").val();
+ 
+    var meal_selector = $("#" + attr_id + " >> .guest_meal");
+    if(!attending)
+        meal_selector.attr("disabled", "disabled");
+    else
+        meal_selector.removeAttr("disabled");
+}
+
+function fix_share_details_state() {
+    if($("#group_wants_share > option:selected").val())
+        $("#group_share_details").show("normal");
+    else
+        $("#group_share_details").hide("normal");
+}
+
 function got_group(data) {
     RSVP_DATA = data;
     var result = TrimPath.processDOMTemplate("group_template", data);
     $("#group_edit_form").html(result);
     $("#group .wrsvp_error").text("");
+
+    $("#group .guest_attending").each(fix_meal_picker_state);
+    $("#group .guest_attending").change(fix_meal_picker_state);
+
+    $("#group_share_textarea").replaceWith("<textarea id=\"group_share_textarea\" cols=\"80\" rows=\"10\"></textarea>");
+    $("#group_share_textarea").val(data["share_details"]);
+
+    fix_share_details_state();
+    $("#group_wants_share").change(fix_share_details_state);
+
     $("#group").show();
     hide_progress();
 }
@@ -236,14 +264,20 @@ $(document).ready(function() {
         var data = {};
         show_progress();
         if(IS_ADMIN) data["street"] = $("#group_street").val();
+        data["wants_share"] = $("#group_wants_share > option:selected").val();
+        data["share_details"] = $("#group_share_details > textarea").val();
         data["guests"] = [];
         $(".guest").each(function() {
             var attr_id = $(this).attr("id");
             var id = extract_id(attr_id);
             var attending = $("#" + attr_id + " >> .guest_attending > option:selected").val();
+            var attending_dessert = "";
+            var attending_dessert_option = $("#" + attr_id + " >> .guest_attending_dessert > option:selected");
+            if(attending_dessert_option) attending_dessert = attending_dessert_option.val();
             var meal = $("#" + attr_id + " >> .guest_meal > option:selected").val();
             data["guests"][data["guests"].length++] = {"id": id,
                                                        "attending": attending,
+                                                       "attending_dessert": attending_dessert,
                                                        "meal": meal};
         });
 

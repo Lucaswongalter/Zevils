@@ -100,6 +100,12 @@ function transform_guests_for_ret($people, $meal_names = false) {
       $attending_bool = False;
     }
 
+    if($guest["attending_dessert"]) {
+      $attending_dessert_bool = True;
+    } else {
+      $attending_dessert_bool = False;
+    }
+
     if($meal_names and $guest["meal"]) {
       $meal = $meal_map[$guest["meal"]];
     } else {
@@ -108,6 +114,7 @@ function transform_guests_for_ret($people, $meal_names = false) {
     $ret_guests[] = array("id" => $guest["person_id"],
                           "name" => $guest["name"],
                           "attending" => $attending_bool,
+                          "attending_dessert" => $attending_dessert_bool,
                           "meal" => $meal);
   }
   return $ret_guests;
@@ -329,6 +336,9 @@ function display_group($path) {
 
   set_ret("success", True);
   set_ret("group_street", $group["street_name"]);
+  set_ret("dessert_invite", $group["rehearsal_dessert_invite"]);
+  set_ret("wants_share", $group["wants_share"]);
+  set_ret("share_details", $group["share_details"]);
   $group_id = 0 + $group["group_id"];
 
   $people = sql_fetch_all_hash(sprintf("SELECT * FROM people WHERE group_id=%d ORDER BY name", $group_id));
@@ -354,6 +364,8 @@ function list_groups($path) {
 
   $yes_total = 0;
   $total = 0;
+  $dessert_yes_total = 0;
+  $dessert_total = 0;
   $ret_groups = array();
   $groups = sql_fetch_all_hash("SELECT * FROM groups ORDER BY group_id");
 
@@ -373,22 +385,32 @@ function list_groups($path) {
     $guests = sql_fetch_all_hash(sprintf("SELECT * FROM people WHERE group_id=%d ORDER BY name", $group_id));
     $ret_groups[] = array("id" => $group["group_id"],
                           "street" => $group["street_name"],
+                          "dessert_invite" => $group["rehearsal_dessert_invite"],
                           "guests" => transform_guests_for_ret($guests, true));
     foreach($guests as $guest) {
       $total++;
-      if($guest["attending"]) $yes_total++;
+      if($guest["attending"]) {
+        $yes_total++;
 
-      if($guest["meal"]) {
-        $meal_name = $meal_map[$guest["meal"]];
-      } else {
-        $meal_name = $meals_ret[0];
+        if($guest["meal"]) {
+          $meal_name = $meal_map[$guest["meal"]];
+        } else {
+          $meal_name = $meals_ret[0];
+        }
+        $meal_counts[$meal_name]++;
       }
-      $meal_counts[$meal_name]++;
+
+      if($group["rehearsal_dessert_invite"]) {
+        $dessert_total++;
+        if($guest["attending_dessert"]) $dessert_yes_total++;
+      }
     }
   }
   set_ret("groups", $ret_groups);
   set_ret("attendee_count", $yes_total);
   set_ret("invitee_count", $total);
+  set_ret("dessert_attendee_count", $dessert_yes_total);
+  set_ret("dessert_invitee_count", $dessert_total);
   set_ret("meals", $meals_ret);
   set_ret("meal_counts", $meal_counts);
 }
@@ -409,15 +431,40 @@ function edit_group($path) {
   $post_data = file_get_contents("php://input");
   $data = json_decode($post_data, true);
 
+  
+  $group_changed_cols = array();
   if(is_admin() and $data["street"] and $group["street_name"] != $data["street"]) {
-      $deltas[] = sprintf("<li>Street name: %s &rarr; %s</li>",
-                          htmlspecialchars($group["street_name"]),
-                          htmlspecialchars($data["street"]));
-      sql_do(sprintf("UPDATE groups SET street_name=upper('%s') WHERE group_id=%d",
-                     mysql_real_escape_string($data["street"]),
+    $group_changed_cols[] = sprintf("street_name=upper('%s')",
+                                    mysql_real_escape_string($data["street"]));
+    $deltas[] = sprintf("<li>Street name: %s &rarr; %s</li>",
+                        htmlspecialchars($group["street_name"]),
+                        htmlspecialchars($data["street"]));
+  }
+
+  $wants_share_bool = 0;
+  if($data["wants_share"]) $wants_share_bool = 1;
+  if($wants_share_bool != 0+$group["wants_share"]) {
+    $group_changed_cols[] = "wants_share=$wants_share_bool";
+    $deltas[] = sprintf("<li>Wants share: %d &rarr; %d</li>",
+                        $group["wants_share"],
+                        $wants_share_bool);
+  }
+
+  if($data["share_details"] != $group["share_details"]) {
+    $group_changed_cols[] = sprintf("share_details='%s'",
+                                    mysql_real_escape_string($data["share_details"]));
+    $deltas[] = sprintf("<li>Share details: '%s' &rarr; '%s'</li>",
+                        htmlspecialchars($group["share_details"]),
+                        htmlspecialchars($data["share_details"]));
+  }
+
+  if(count($group_changed_cols)) {
+      sql_do(sprintf("UPDATE groups SET %s WHERE group_id=%d",
+                     implode(", ", $group_changed_cols),
                      $group_id));
   }
 
+  
   $people = sql_fetch_all_hash(sprintf("SELECT * FROM people WHERE group_id=%d", $group_id));
   $people_map = array();
   foreach($people as $person) {
@@ -426,19 +473,27 @@ function edit_group($path) {
 
   foreach($data["guests"] as $guest) {
       $attending_bool = 0;
+      $attending_dessert_bool = 0;
       $meal_raw = "NULL";
       $guest_id = 0 + $guest["id"];
       $person = $people_map[$guest_id];
       if($guest["attending"]) $attending_bool = 1;
+      if($guest["attending_dessert"]) $attending_dessert_bool = 1;
       if($guest["meal"]) $meal_raw = sprintf("%d", 0 + $guest["meal"]);
       
-      sql_do("UPDATE people SET attending=$attending_bool, meal=$meal_raw WHERE person_id=$guest_id AND group_id=$group_id");
+      sql_do("UPDATE people SET attending=$attending_bool, attending_dessert=$attending_dessert_bool, meal=$meal_raw WHERE person_id=$guest_id AND group_id=$group_id");
 
       if($attending_bool != 0+$person["attending"]) {
           $deltas[] = sprintf("<li>%s attending: %s &rarr; %s</li>",
                               htmlspecialchars($person["name"]),
                               $person["attending"],
                               $attending_bool);
+      }
+      if($attending_dessert_bool != 0+$person["attending_dessert"]) {
+          $deltas[] = sprintf("<li>%s attending dessert: %s &rarr; %s</li>",
+                              htmlspecialchars($person["name"]),
+                              $person["attending_dessert"],
+                              $attending_dessert_bool);
       }
       if(($guest["meal"] and !$person["meal"]) or
          (!$guest["meal"] and $person["meal"]) or
@@ -449,26 +504,28 @@ function edit_group($path) {
         $new_meal = "No Selection";
         if($guest["meal"]) $new_meal = $meal_map[$guest["meal"]];
 
-        $deltas[] = sprintf("<li>%s meal selection: %s &rarr; %s</li>",
+        $deltas[] = sprintf("<li>%s meal selection: <pre>%s</pre> &rarr; <pre>%s</pre></li>",
                             htmlspecialchars($person["name"]),
                             $old_meal,
                             $new_meal);
       }
   }
 
-  if(is_admin()) {
-    $changetext = "<p>An admin";
-  } else {
-    $changetext = "<p>A user";
-  }
-  $changetext .= " at IP " . $_SERVER["REMOTE_ADDR"] . " changed group $group_id as follows:</p>\n";
-  $changetext .= "<ul>\n" . implode("\n", $deltas) . "\n</ul>\n";
+  if(count($deltas)) {
+    if(is_admin()) {
+      $changetext = "<p>An admin";
+    } else {
+      $changetext = "<p>A user";
+    }
+    $changetext .= " at IP " . $_SERVER["REMOTE_ADDR"] . " changed group $group_id as follows:</p>\n";
+    $changetext .= "<ul>\n" . implode("\n", $deltas) . "\n</ul>\n";
 
-  sql_do("INSERT INTO changes(change_time, change_text) VALUES ('" .
-         mysql_real_escape_string(gmstrftime("%Y-%m-%dT%H:%M:%SZ")) .
-         "', '" .
-         mysql_real_escape_string($changetext) .
-         "')");
+    sql_do("INSERT INTO changes(change_time, change_text) VALUES ('" .
+           mysql_real_escape_string(gmstrftime("%Y-%m-%dT%H:%M:%SZ")) .
+           "', '" .
+           mysql_real_escape_string($changetext) .
+           "')");
+  }
   
   display_group($path);
 }
@@ -478,8 +535,8 @@ function export_csv($path) {
     header("Content-type: excel/ms-excel; name=wedding-rsvp.xls");
 
     $meal_map = meal_map();
-    $people = sql_fetch_all_hash("SELECT * FROM people ORDER BY group_id, name");
-    print("\"Group\"\t\"Name\"\t\"Attending?\"\t\"Meal\"\n");
+    $people = sql_fetch_all_hash("SELECT groups.group_id AS 'group_id', groups.rehearsal_dessert_invite, people.* FROM people left outer join groups on people.group_id=groups.group_id ORDER BY groups.group_id, name");
+    print("\"Group\"\t\"Name\"\t\"Attending?\"\t\"Meal\"\t\"Attending Dessert?\"\n");
     foreach($people as $person) {
         if($person["meal"]) {
             $meal = $meal_map[$person["meal"]];
@@ -490,14 +547,23 @@ function export_csv($path) {
         if($person["attending"]) {
             $attending = "Y";
         } else {
-            $attending = "";
+            $attending = "N";
+        }
+
+        if(!$person["rehearsal_dessert_invite"]) {
+            $attending_dessert = "U";
+        } else if($person["attending_dessert"]) {
+            $attending_dessert = "Y";
+        } else {
+            $attending_dessert = "N";
         }
         
-        printf("\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\n",
+        printf("\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\n",
                $person["group_id"],
                $person["name"],
                $attending,
-               $meal);
+               $meal,
+               $attending_dessert);
     }
 }
 
