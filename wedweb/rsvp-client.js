@@ -271,14 +271,18 @@ $(document).ready(function() {
             var attr_id = $(this).attr("id");
             var id = extract_id(attr_id);
             var attending = $("#" + attr_id + " >> .guest_attending > option:selected").val();
-            var attending_dessert = "";
-            var attending_dessert_option = $("#" + attr_id + " >> .guest_attending_dessert > option:selected");
-            if(attending_dessert_option) attending_dessert = attending_dessert_option.val();
             var meal = $("#" + attr_id + " >> .guest_meal > option:selected").val();
-            data["guests"][data["guests"].length++] = {"id": id,
-                                                       "attending": attending,
-                                                       "attending_dessert": attending_dessert,
-                                                       "meal": meal};
+
+            guest_data = {"id": id,
+                          "attending": attending,
+                          "meal": meal}
+            var attending_dessert_option = $("#" + attr_id + " >> .guest_attending_dessert > option:selected");
+            if(attending_dessert_option) {
+                var val = attending_dessert_option.val();
+                if(val) guest_data["attending_dessert"] = val;
+            }
+
+            data["guests"][data["guests"].length++] = guest_data;
         });
 
         var editURL;
