@@ -336,7 +336,9 @@ function display_group($path) {
 
   set_ret("success", True);
   set_ret("group_street", $group["street_name"]);
-  set_ret("dessert_invite", $group["rehearsal_dessert_invite"]);
+  $dessert_invite = false;
+  if(0+$group["rehearsal_dessert_invite"]) $dessert_invite = true;
+  set_ret("dessert_invite", $dessert_invite);
   set_ret("wants_share", $group["wants_share"]);
   set_ret("share_details", $group["share_details"]);
   $group_id = 0 + $group["group_id"];
@@ -383,9 +385,11 @@ function list_groups($path) {
   foreach($groups as $group) {
     $group_id = 0 + $group["group_id"];
     $guests = sql_fetch_all_hash(sprintf("SELECT * FROM people WHERE group_id=%d ORDER BY name", $group_id));
+    $dessert_invite = false;
+    if(0 + $group["rehearsal_dessert_invite"]) $dessert_invite = true;
     $ret_groups[] = array("id" => $group["group_id"],
                           "street" => $group["street_name"],
-                          "dessert_invite" => $group["rehearsal_dessert_invite"],
+                          "dessert_invite" => $dessert_invite,
                           "guests" => transform_guests_for_ret($guests, true));
     foreach($guests as $guest) {
       $total++;
@@ -400,7 +404,7 @@ function list_groups($path) {
         $meal_counts[$meal_name]++;
       }
 
-      if($group["rehearsal_dessert_invite"]) {
+      if($dessert_invite) {
         $dessert_total++;
         if($guest["attending_dessert"]) $dessert_yes_total++;
       }
