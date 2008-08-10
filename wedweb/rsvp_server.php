@@ -566,12 +566,12 @@ function edit_group($path) {
 }
 
 function export_csv($path) {
-    header("Content-disposition: attachment; filename=wedding-rsvp.xls");
-    header("Content-type: excel/ms-excel; name=wedding-rsvp.xls");
+    header("Content-disposition: attachment; filename=wedding-rsvp.csv");
+    header("Content-type: text/csv; name=wedding-rsvp.csv");
 
     $meal_map = meal_map();
-    $people = sql_fetch_all_hash("SELECT groups.group_id AS 'group_id', groups.rehearsal_dessert_invite, people.* FROM people left outer join groups on people.group_id=groups.group_id ORDER BY groups.group_id, name");
-    print("\"Group\"\t\"Name\"\t\"Attending?\"\t\"Meal\"\t\"Attending Dessert?\"\n");
+    $people = sql_fetch_all_hash("SELECT groups.group_id AS 'group_id', groups.street_name AS 'street_name', groups.rehearsal_dessert_invite, people.* FROM people left outer join groups on people.group_id=groups.group_id ORDER BY groups.group_id, name");
+    print("\"Group\"\t\"Street\"\t\"Name\"\t\"Attending?\"\t\"Meal\"\t\"Attending Dessert?\"\n");
     foreach($people as $person) {
         if($person["meal"]) {
             $meal = $meal_map[$person["meal"]];
@@ -597,8 +597,9 @@ function export_csv($path) {
           $attending_dessert = "Y";
         }
         
-        printf("\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\n",
+        printf("\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\t\"%s\"\n",
                $person["group_id"],
+               $person["street_name"],
                $person["name"],
                $attending,
                $meal,
