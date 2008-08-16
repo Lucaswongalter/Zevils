@@ -74,8 +74,10 @@
         var RSRC_BASE = "<? echo $RSRC_BASE; ?>";
     //--></script>
     <script src="<? echo $RSRC_BASE; ?>jquery-1.2.6.min.js" type="text/javascript"></script>
-    <script src="<? echo $RSRC_BASE; ?>thickbox-compressed.js" type="text/javascript"></script>
+    <script src="<? echo $RSRC_BASE; ?>thickbox.min.js" type="text/javascript"></script>
     <? if($WEBPAGE_FILE == "rsvp.php") { ?>
+      <script src="<? echo $RSRC_BASE; ?>jquery.center.min.js" type="text/javascript"></script>
+      <script src="<? echo $RSRC_BASE; ?>jquery.simplemodal-1.1.1.min.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>jquery.json.min.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>trimpath-template.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>rsvp-client.js" type="text/javascript"></script>
@@ -83,7 +85,6 @@
     <script src="<? echo $RSRC_BASE; ?>header.js" type="text/javascript"></script>
 </head>
 <body>
-<? if($after_body) echo $after_body; ?>
 <div id="page">
 <div id="page-header">
 <h1 class="all-header-text"><a href="<? echo $RSRC_BASE; ?>index.php"><img src="<? echo $RSRC_BASE; ?>images/banner.png"></a></h1>

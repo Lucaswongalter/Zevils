@@ -247,7 +247,7 @@ dl.inline-dl dd {
 
 /* WRSVP */
 
-.wrsvp_error {
+.wrsvp_error, .wrsvp_guest_error {
    color: red;
    font-weight: bold;
 }
@@ -290,7 +290,7 @@ dl.inline-dl dd {
    z-index: 101;
 }
 
-#modal-window {
+.modal-dialog {
    position: fixed;
    top: 50%;
    left: 40%;
@@ -305,7 +305,7 @@ dl.inline-dl dd {
    color: white;
 }
 
-#modal-window p {
+#modal-loading p {
    margin: 1em;
    padding: 0;
 }

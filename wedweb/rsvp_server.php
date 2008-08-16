@@ -104,7 +104,7 @@ function transform_guests_for_ret($people, $meal_names = false) {
   $ret_guests = array();
   foreach($people as $guest) {
     $attending = db_bool_to_php($guest["attending"]);
-    $attending_dessert = db_bool_to_php($guest["attending"]);
+    $attending_dessert = db_bool_to_php($guest["attending_dessert"]);
 
     if($meal_names and $guest["meal"]) {
       $meal = $meal_map[$guest["meal"]];
@@ -286,7 +286,7 @@ function authenticate_guest($path = array()) {
   } else {
     $norm_last_name = normalize_name($last_name);
     $norm_street_name = strtoupper($street_name);
-    $norm_street_name = preg_replace("/ (STREET|ST|PLACE|PL|AVE|AVENUE|DRIVE|DR|COURT|CT|EXPRESSWAY|EXPY|PARKWAY|PKWY|TURNPIKE|TPKE)\\.?$/", "", $norm_street_name);
+    $norm_street_name = preg_replace("/ (STREET|ST|PLACE|PL|AVE|AVENUE|DRIVE|DR|COURT|CT|EXPRESSWAY|EXPY|PARKWAY|PKWY|TURNPIKE|TPKE|BLVD|BOULEVARD|BOLEVARD|CIR|CIRCLE|LN|LANE|RD|ROAD|TER|TERR|TERRACE|WAY)\\.?$/", "", $norm_street_name);
     
     $sql = sprintf("SELECT * FROM groups WHERE (street_name='%s' OR street_name LIKE '%% %s')",
                    mysql_real_escape_string($norm_street_name),
@@ -347,6 +347,7 @@ function display_group($path) {
   set_ret("dessert_invite", $dessert_invite);
   set_ret("wants_share", $group["wants_share"]);
   set_ret("share_details", $group["share_details"]);
+  set_ret("comments", $group["comments"]);
   $group_id = 0 + $group["group_id"];
 
   $people = sql_fetch_all_hash(sprintf("SELECT * FROM people WHERE group_id=%d ORDER BY name", $group_id));
@@ -480,6 +481,14 @@ function edit_group($path) {
                         htmlspecialchars($data["share_details"]));
   }
 
+  if($data["comments"] != $group["comments"]) {
+    $group_changed_cols[] = sprintf("comments='%s'",
+                                    mysql_real_escape_string($data["comments"]));
+    $deltas[] = sprintf("<li>Comments: '%s' &rarr; '%s'</li>",
+                        htmlspecialchars($group["comments"]),
+                        htmlspecialchars($data["comments"]));
+  }
+
   if(count($group_changed_cols)) {
       sql_do(sprintf("UPDATE groups SET %s WHERE group_id=%d",
                      implode(", ", $group_changed_cols),
@@ -503,7 +512,7 @@ function edit_group($path) {
       if(is_null($guest_attending_dessert))
         $guest_attending_dessert_raw = "NULL";
       else
-        $guest_attending_dessert_raw = $guest_attending;
+        $guest_attending_dessert_raw = $guest_attending_dessert;
       $attending_dessert_bool = 0;
       $meal_raw = "NULL";
       $guest_id = 0 + $guest["id"];

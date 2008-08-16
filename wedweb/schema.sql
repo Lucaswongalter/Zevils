@@ -9,6 +9,7 @@ CREATE TABLE groups (
        rehearsal_dessert_invite BOOLEAN NOT NULL DEFAULT 0,
        wants_share BOOLEAN NOT NULL DEFAULT 0,
        share_details TEXT NOT NULL DEFAULT "",
+       comments TEXT NOT NULL DEFAULT "",
        INDEX (street_name)
 );
 

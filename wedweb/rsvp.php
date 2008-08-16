@@ -6,14 +6,20 @@
     $RSRC_BASE = "/";
   }
 
-  $after_body = <<<END
-<div id="modal-overlay"></div>
-<div id="modal-window"">
-  <p><img src="${RSRC_BASE}ajax-loader.gif" width="16" height="16"> Loading...</p>
-</div>
-END;
   include("header.inc");
 ?>
+
+<div id="modal-overlay" style="display: none"></div>
+<div id="modal-loading" style="display: none" class="modal-dialog">
+  <p><img src="${RSRC_BASE}ajax-loader.gif" width="16" height="16"> Loading...</p>
+</div>
+<div id="modal-thanks" style="display: none" class="modal-dialog">
+  <p class="modal-thanks-text"></p>
+  <p class="modal-thanks-subtext">If you need to change your
+  responses, simply do so and click the <tt>Update Responses</tt>
+  button again.</p>
+  <p class="modal-thanks-button"><input id="modal-thanks-close-button" type="button" value="OK"></p>
+</div>
 
 <div id="admin_text" style="display: none" class="wrsvp_text">
 <p><b>You are an administrator. You can <a id="admin_logout" href="rsvp.php/admin_logout">log out</a> 
@@ -31,11 +37,11 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
 <div id="guest_auth" class="wrsvp_action wrsvp_text"<? if($_REQUEST["do_admin"]) { ?> style="display: none"<? } ?>>
 <p class="wrsvp_error"></p>
 <p>To respond to your invitation, please provide your <b>last name</b> and the
-   <b>name of the street</b> to which your invitation was sent (for instance, if your
+   <b>name of the street</b> (or P.O. box number) to which your invitation was sent (for instance, if your
    invitation was sent to <i>1600 West Pennsylvania Ave.</i>, enter <i>Pennsylvania</i>.)</p>
 <form method="POST" action="rsvp.php/guest_auth" id="guest_auth_form"><table class="wrsvp_form">
   <tr><td>Last Name:</td><td><input type="text" name="last_name" id="guest_auth_last_name" length="30" value="<? echo urlencode($_POST["last_name"]); ?>"></td></tr>
-  <tr><td>Street Name:</td><td><input type="text" name="street_name" id="guest_auth_street_name" length="30" value="<? echo urlencode($_POST["street_name"]); ?>"></td></tr>
+  <tr><td>Street Name or P.O. Box Number:</td><td><input type="text" name="street_name" id="guest_auth_street_name" length="30" value="<? echo urlencode($_POST["street_name"]); ?>"></td></tr>
 <tr><td></td><td><input type="submit" name="submit" id="guest_auth_submit" value="View Response"></td></tr>
 </table></form>
 </div>
@@ -55,7 +61,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
 
 <div id="group" style="display: none" class="wrsvp_action wrsvp_text">
   <p class="wrsvp_error"></p>
-  <p>If this is not the party that you'd like to RSVP for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
+  <p>If this isn't the party that you'd like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
   <form method="POST" action="rsvp.php/edit_group" id="group_edit_form">
   </form>
 </div>
@@ -63,7 +69,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
   {if IS_ADMIN}<p>Street Name: <input type="text" length="20" id="group_street" value="${RSVP_DATA["group_street"]}"></p>
   <p>Guests:</p>{/if}
   <table class="wrsvp_form">
-  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Attending Rehearsal Dessert Party?</th>{/if}<th>Attending Wedding?</th><th>Meal</th></tr>{for guest in RSVP_DATA["guests"]}
+  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Attending Rehearsal Dessert Party?</th>{/if}<th>Attending Wedding?</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
     <tr class="guest" id="guest_${guest["id"]}">
     <td class="guest_name">${guest["name"]}</td>
     {if RSVP_DATA["dessert_invite"]}
@@ -82,6 +88,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
       <option value=""{if !guest["meal"]} selected{/if}>No Selection</option>{for meal in RSVP_DATA["meal_options"]}
       <option value="${meal[0]}"{if guest["meal"] == meal[0]} selected{/if}>${meal[1]}</option>{/for}
     </select></td>
+    <td class="wrsvp_guest_error" style="display: none"></td>
     </tr>{/for}
   </table>
   <p>Are you interested in sharing transportation or lodging with
@@ -93,9 +100,15 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     <p>Please give us details such as where you're coming from, your travel dates, what you're looking for / offering, and we'll do what we can.  Also, please provide an email address where we, and other guests we may want to put in contact with you, can reach you.</p>
     <div id="group_share_textarea"></div>
   </div>
+  <div id="group_comments">
+    <p>If you have any comments or questions, you
+    can <a href="mailto:us@sachsfam.org">email us</a> or provide them
+    here.  If you'd like a response, please let us know how to contact you.</p>
+    <div id="group_comments_textarea"></div>
+  </div>
   
   <p class="wrsvp_success"></p>
-  <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Submit Responses"></p>
+  <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Update Responses"></p>
 
   <h3><span class="subheader-text all-header-text">About the Entr&eacute;e Selections</span></h3>
   <dl class="wrsvp-dl">
@@ -114,7 +127,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     <dd>Grilled New York sirloin steak served with herb roasted
     fingerling potatoes, caramelized cipollini, red wine jus.</dd>
   </dl>
-  <p>If you have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.</span>
+  <p>If you would like a kid's meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.</span>
 
 </textarea>
 
