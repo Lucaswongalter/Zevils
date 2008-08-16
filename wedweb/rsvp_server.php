@@ -621,9 +621,9 @@ function export_rss($path) {
     return;
   }
 
-  $atom_tag = "tag:matthewg@zevils.com,2008-08-09:wrsvp";
+  $atom_tag = "tag:matthewg@zevils.com,2008-08-09:wrsvp2";
   include_once('atombuilder/class.AtomBuilder.inc.php');
-  $atom = new AtomBuilder("Wedding Responses", "http://w.sachsfam.org/rsvp_server.php/rss", $atom_tag);
+  $atom = new AtomBuilder("Wedding Responses", "http://w.sachsfam.org/rsvp_server.php/rss2", $atom_tag);
 
   $changes = sql_fetch_all_hash("SELECT change_id, change_time, change_text FROM changes ORDER BY change_time DESC LIMIT 200");
 
@@ -637,7 +637,7 @@ function export_rss($path) {
   $atom->addLink("http://w.sachsfam.org/rsvp.php", "Homepage", "alternate", "text/html", "en");
 
   foreach($changes as $change) {
-    $entry = $atom->newEntry("Response #" . $change["change_id"], "http://w.sachsfam.org/rsvp.php/" . $change["change_id"], "$atom_tag/" . $change["change_id"]);
+    $entry = $atom->newEntry("Response #" . $change["change_id"], "http://w.sachsfam.org/rsvp.php/rss2/" . $change["change_id"], "$atom_tag/" . $change["change_id"]);
     $entry->setUpdated($change["change_time"]);
     $entry->setContent($change["change_text"], "html");
     $atom->addEntry($entry);
@@ -687,7 +687,7 @@ function dispatch_request() {
   } else if($obj == "csv") {
     export_csv($path);
     exit();
-  } else if($obj == "rss") {
+  } else if($obj == "rss2") {
     export_rss($path);
     exit();
   } else if($obj) {

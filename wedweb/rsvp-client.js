@@ -87,7 +87,7 @@ function get_grouplist() {
             var pass = prompt("Please enter the RSS password");
             if(pass) {
                 $(this).unbind("click");
-                var url = RSRC_BASE + "rsvp_server.php/rss?rssauth=" + pass;
+                var url = RSRC_BASE + "rsvp_server.php/rss2?rssauth=" + pass;
                 $(this).attr("href", url);
                 $(this).text("http://w.sachsfam.org" + url);
             }
