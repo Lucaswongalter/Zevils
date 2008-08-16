@@ -11,7 +11,7 @@
 
 <div id="modal-overlay" style="display: none"></div>
 <div id="modal-loading" style="display: none" class="modal-dialog">
-  <p><img src="${RSRC_BASE}ajax-loader.gif" width="16" height="16"> Loading...</p>
+  <p><img src="<? echo $RSRC_BASE; ?>ajax-loader.gif" width="16" height="16"> Loading...</p>
 </div>
 <div id="modal-thanks" style="display: none" class="modal-dialog">
   <p class="modal-thanks-text"></p>
