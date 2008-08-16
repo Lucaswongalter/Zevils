@@ -625,17 +625,19 @@ function export_rss($path) {
   include_once('atombuilder/class.AtomBuilder.inc.php');
   $atom = new AtomBuilder("Wedding Responses", "http://w.sachsfam.org/rsvp_server.php/rss", $atom_tag);
 
-  $changes = sql_fetch_all_hash("SELECT change_time, change_text FROM changes ORDER BY change_time DESC LIMIT 200");
+  $changes = sql_fetch_all_hash("SELECT change_id, change_time, change_text FROM changes ORDER BY change_time DESC LIMIT 200");
 
   $atom->setUpdated($changes[0]["change_time"]);
   $atom->setEncoding("UTF-8");
   $atom->setLanguage("en");
   $atom->setSubtitle("Responses to our wedding invitations");
   $atom->setIcon("http://w.sachsfam.org/favicon.ico");
+  $atom->setAuthor('Liz and Matthew', 'us@sachsfam.org', 'http://sachsfam.org/');
+  $atom->addContributor('Liz and Matthew', 'us@sachsfam.org');
   $atom->addLink("http://w.sachsfam.org/rsvp.php", "Homepage", "alternate", "text/html", "en");
 
   foreach($changes as $change) {
-    $entry = $atom->newEntry("Response", "http://w.sachsfam.org/rsvp.php", "$atom_tag/" . $change["change_id"]);
+    $entry = $atom->newEntry("Response #" . $change["change_id"], "http://w.sachsfam.org/rsvp.php/" . $change["change_id"], "$atom_tag/" . $change["change_id"]);
     $entry->setUpdated($change["change_time"]);
     $entry->setContent($change["change_text"], "html");
     $atom->addEntry($entry);
