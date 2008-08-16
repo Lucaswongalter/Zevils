@@ -544,7 +544,7 @@ function edit_group($path) {
         $new_meal = "No Selection";
         if($guest["meal"]) $new_meal = $meal_map[$guest["meal"]];
 
-        $deltas[] = sprintf("<li>%s meal selection: <pre>%s</pre> &rarr; <pre>%s</pre></li>",
+        $deltas[] = sprintf("<li>%s meal selection: %s &rarr; %s</li>",
                             htmlspecialchars($person["name"]),
                             $old_meal,
                             $new_meal);
