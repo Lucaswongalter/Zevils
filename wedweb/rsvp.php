@@ -16,7 +16,7 @@
 <div id="modal-thanks" style="display: none" class="modal-dialog">
   <p class="modal-thanks-text"></p>
   <p class="modal-thanks-subtext">If you need to change your
-  responses, simply do so and click the <tt>Update Responses</tt>
+  responses, simply do so and click the &ldquo;Update Responses&rdquo;
   button again.</p>
   <p class="modal-thanks-button"><input id="modal-thanks-close-button" type="button" value="OK"></p>
 </div>
@@ -61,7 +61,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
 
 <div id="group" style="display: none" class="wrsvp_action wrsvp_text">
   <p class="wrsvp_error"></p>
-  <p>If this isn't the party that you'd like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
+  <p>If this isn&rsquo;t the party that you&rsquo;d like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
   <form method="POST" action="rsvp.php/edit_group" id="group_edit_form">
   </form>
 </div>
@@ -90,6 +90,18 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     </select></td>
     <td class="wrsvp_guest_error" style="display: none"></td>
     </tr>{/for}
+    {if RSVP_DATA["guests"].length > 1}
+    <tr>
+        <td></td>
+        {if RSVP_DATA["dessert_invite"]}<td><input type="button" id="group_all_not_attending_dessert" value="Nobody&rsquo;s Attending"></td>{/if}
+        <td><input type="button" id="group_all_not_attending" value="Nobody&rsquo;s Attending"></td>
+    </tr>
+    <tr>
+        <td></td>
+        {if RSVP_DATA["dessert_invite"]}<td><input type="button" id="group_all_attending_dessert" value="Everybody&rsquo;s Attending"></td>{/if}
+        <td><input type="button" id="group_all_attending" value="Everybody&rsquo;s Attending"></td>
+    </tr>
+    {/if}
   </table>
   <p>Are you interested in sharing transportation or lodging with
   other guests? <select id="group_wants_share">
@@ -97,13 +109,13 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     <option value="true"{if RSVP_DATA["wants_share"] == "1"} selected{/if}>Yes</option>
   </select></p>
   <div id="group_share_details" style="display: none">
-    <p>Please give us details such as where you're coming from, your travel dates, what you're looking for / offering, and we'll do what we can.  Also, please provide an email address where we, and other guests we may want to put in contact with you, can reach you.</p>
+    <p>Please give us details such as where you&rsquo;re coming from, your travel dates, and what you&rsquo;re looking for / offering; we&rsquo;ll do what we can.  Also, please provide an email address where we, and other guests we may want to put in contact with you, can reach you.</p>
     <div id="group_share_textarea"></div>
   </div>
   <div id="group_comments">
     <p>If you have any comments or questions, you
     can <a href="mailto:us@sachsfam.org">email us</a> or provide them
-    here.  If you'd like a response, please let us know how to contact you.</p>
+    here.  If you&rsquo;d like a response, please let us know how to contact you.</p>
     <div id="group_comments_textarea"></div>
   </div>
   
@@ -127,7 +139,7 @@ or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a
     <dd>Grilled New York sirloin steak served with herb roasted
     fingerling potatoes, caramelized cipollini, red wine jus.</dd>
   </dl>
-  <p>If you would like a kid's meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.</span>
+  <p>If you would like a kid&rsquo;s meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.</span>
 
 </textarea>
 

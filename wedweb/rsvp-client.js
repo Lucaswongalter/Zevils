@@ -111,6 +111,34 @@ function get_grouplist() {
     });
 }
 
+function set_all_guests(attending, dessert) {
+  $(".guest").each(function() {
+    var attr_id = $(this).attr("id");
+    var sel_class;
+    var sel_val;
+    if(dessert)
+      sel_class = ".guest_attending_dessert";
+    else
+      sel_class = ".guest_attending";
+    if(attending)
+      sel_val = "1";
+    else
+      sel_val = "0";
+
+    var selector = "#" + attr_id + " >> " + sel_class + " > option";
+    $(selector).removeAttr("selected");
+    $(selector + "[@value='" + sel_val + "']").attr("selected", "selected");
+
+    if(!dessert) {
+      var meal_selector = $("#" + attr_id + " >> .guest_meal");
+      if(attending)
+        meal_selector.removeAttr("disabled");
+      else
+        meal_selector.attr("disabled", "disabled");
+    }
+  });
+}
+
 function fix_meal_picker_state() {
     var attr_id = $(this).parents(".guest").attr("id");
     var attending = $("#" + attr_id + " >> .guest_attending > option:selected").val();
@@ -134,6 +162,23 @@ function got_group(data) {
     var result = TrimPath.processDOMTemplate("group_template", data);
     $("#group_edit_form").html(result);
     $("#group .wrsvp_error").text("");
+
+    $("#group_all_attending_dessert").click(function() {
+      set_all_guests(true, true);
+      return false;
+    });
+    $("#group_all_attending").click(function() {
+      set_all_guests(true, false);
+      return false;
+    });
+    $("#group_all_not_attending_dessert").click(function() {
+      set_all_guests(false, true);
+      return false;
+    });
+    $("#group_all_not_attending").click(function() {
+      set_all_guests(false, false);
+      return false;
+    });
 
     $("#group .guest_attending").each(fix_meal_picker_state);
     $("#group .guest_attending").change(fix_meal_picker_state);
@@ -287,7 +332,7 @@ $(document).ready(function() {
 
         return false;
     });
-
+    
     $("#group_edit_form").submit(function() {
         var data = {};
         show_progress();
