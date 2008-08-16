@@ -17,7 +17,7 @@ function show_progress(show_thanks) {
     }
 
     if($("#modal-overlay").is(":hidden"))
-        $("#modal-overlay").show("fast");
+        $("#modal-overlay").show();
 
     old_div.hide();
 
@@ -30,7 +30,7 @@ function hide_progress() {
         $("#modal-loading").hide("fast");
     //else
         $("#modal-thanks").hide("fast");
-    $("#modal-overlay").hide("fast");
+    $("#modal-overlay").hide();
 }
 
 function error_message(data) {
