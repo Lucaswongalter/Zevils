@@ -21,7 +21,6 @@ function show_progress(show_thanks) {
 
     old_div.hide();
 
-    modal_div.center({vertical: true, horizontal: true});
     if(modal_div.is(":hidden")) modal_div.show("fast");
 }
 

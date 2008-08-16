@@ -1,5 +1,9 @@
 <? 
 
+  header("Pragma: no-cache");
+  header("Expires: -1");
+  header("Cache-Control: no-cache, must-revalidate");
+
   if($_SERVER["SERVER_NAME"] == "localhost" or $_SERVER["SERVER_NAME"] == "192.168.1.193") {
     $RSRC_BASE = "/wedding/";
   } else {

@@ -76,8 +76,6 @@
     <script src="<? echo $RSRC_BASE; ?>jquery-1.2.6.min.js" type="text/javascript"></script>
     <script src="<? echo $RSRC_BASE; ?>thickbox.min.js" type="text/javascript"></script>
     <? if($WEBPAGE_FILE == "rsvp.php") { ?>
-      <script src="<? echo $RSRC_BASE; ?>jquery.center.min.js" type="text/javascript"></script>
-      <script src="<? echo $RSRC_BASE; ?>jquery.simplemodal-1.1.1.min.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>jquery.json.min.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>trimpath-template.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>rsvp-client.js" type="text/javascript"></script>

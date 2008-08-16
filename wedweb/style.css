@@ -3,7 +3,7 @@ html,body {
 	padding: 0;
 	padding-bottom: 0;
 	height: 100%;
-   max-width: 70em;
+  max-width: 70em;
 	font-size: 10pt;
 	font-family: Geneva, Verdana, sans-serif;
 	color: black;
@@ -293,8 +293,9 @@ dl.inline-dl dd {
 .modal-dialog {
    position: fixed;
    top: 50%;
-   left: 40%;
-   margin: 0;
+   margin-left: auto;
+   margin-right: auto;
+   left: 25%;
    padding: 0;
    z-index: 102;
    border: thin solid black;
@@ -304,6 +305,9 @@ dl.inline-dl dd {
    background: black;
    color: white;
 }
+
+#modal-loading { width: 10em; }
+#modal-thanks { width: 35em; }
 
 #modal-loading p {
    margin: 1em;
