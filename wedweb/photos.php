@@ -26,6 +26,15 @@
 <? fancyImage("tabifloor.jpg", "Tabi finds a sunspot.", 128, 96); ?>
 </p></dd>
 
+<dt class="bar-header"><span class="header-text all-header-text">Claws von Stauffenberg</span></dt>
+<dd>
+<p>
+<? /* fancyImage("filename.jpg", "The Caption Goes Here", thumbnail-width, thumbnail-height); */ ?>
+<? fancyImage("clawswindow.jpg", "Claws enjoying a nice window.", 128, 96); ?>
+<? fancyImage("clawsfloor.jpg", "He matches the floors.", 96, 128); ?>
+<? fancyImage("clawsclaws.jpg", "He's evolved opposable thumbs. Be afraid. Be very afraid.", 128, 96); ?>
+</p></dd>
+
 <dt class="bar-header"><span class="header-text all-header-text">Gifford Family</span></dt>
 <dd>
 <p>
