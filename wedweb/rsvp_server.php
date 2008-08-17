@@ -286,8 +286,31 @@ function authenticate_guest($path = array()) {
   } else {
     $norm_last_name = normalize_name($last_name);
     $norm_street_name = strtoupper($street_name);
-    $norm_street_name = preg_replace("/ (STREET|ST|PLACE|PL|AVE|AVENUE|DRIVE|DR|COURT|CT|EXPRESSWAY|EXPY|PARKWAY|PKWY|TURNPIKE|TPKE|BLVD|BOULEVARD|BOLEVARD|CIR|CIRCLE|LN|LANE|RD|ROAD|TER|TERR|TERRACE|WAY)\\.?$/", "", $norm_street_name);
-    
+    $norm_street_name = preg_replace("/ *\\(.*?\\) */", "", $norm_street_name);
+    $norm_street_name = preg_replace("/,.*/", "", $norm_street_name);
+    $norm_street_name = preg_replace("/ +(APARTMENT|APT\\.) */", "", $norm_street_name);
+    $norm_street_name = preg_replace("/(?!BOX) +#[0-9]+ */", "", $norm_street_name);
+    $norm_street_name = preg_replace("/ +[A-Z][0-9]*\$/", "", $norm_street_name);
+    $norm_street_name = preg_replace(array("/\\bNORTH\\b/",
+                                           "/\\bSOUTH\\b/",
+                                           "/\\bEAST\\b/",
+                                           "/\\bWEST\\b/",
+                                           "/\\bNORTHWEST\\b/",
+                                           "/\\bSOUTHWEST\\b/",
+                                           "/\\bSOUTHEAST\\b/"),
+                                     array("N", "S", "E", "W", "NW", "SW", "SE"),
+                                     $norm_street_name);
+    $norm_street_name = preg_replace("/^([0-9]+) (.*) (N|S|E|W|NW|SW|SE)$/",
+                                     "\\1 \\3 \\2",
+                                     $norm_street_name);
+    $norm_street_name = preg_replace("/ (STREET|ST|PLACE|PL|PLACE|AVE|AVENUE|DRIVE|DR|COURT|CT|EXPRESSWAY|EXPY|PARKWAY|PKWY|TURNPIKE|TPKE|BLVD|BOULEVARD|BOLEVARD|CIR|CIRCLE|LN|LANE|RD|ROAD|TER|TERR|TERRACE|WAY)\\.?$/", "", $norm_street_name);
+    $norm_street_name = preg_replace(array("/\\bTHIRD\\b/",
+                                           "/\\bFOURTH\\b/"),
+                                     array("3RD", "4TH"),
+                                     $norm_street_name);
+    if($norm_street_name == "158TH") {
+      $norm_street_name = "158";
+    }
     $sql = sprintf("SELECT * FROM groups WHERE (street_name='%s' OR street_name LIKE '%% %s')",
                    mysql_real_escape_string($norm_street_name),
                    mysql_real_escape_string($norm_street_name));
@@ -674,6 +697,11 @@ function dispatch_request() {
     set_ret("action", "logout");
     set_ret("success", True);
     init_session(Null, True);
+  } else if($obj == "guest_logout") {
+    set_ret("is_guest", False);
+    set_ret("action", "logout");
+    set_ret("success", True);
+    if(!is_admin()) init_session(Null, True);
   } else if($obj == "admin_auth") {
     authenticate_admin($path);
   } else if($obj == "guest_auth") {

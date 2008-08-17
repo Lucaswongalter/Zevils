@@ -196,6 +196,7 @@ function got_group(data) {
 
 function find_group(group_id) {
     var url;
+    CURRENT_EDIT_GROUP = null;
     if(group_id) {
         url = "rsvp_server.php/guest_auth/" + group_id;
     } else {
@@ -284,7 +285,7 @@ $(document).ready(function() {
 
     $("#guest_auth_logout").click(function() {
         show_progress();
-        $.getJSON(RSRC_BASE + "rsvp_server.php/logout", function(data, status) {
+        $.getJSON(RSRC_BASE + "rsvp_server.php/guest_logout", function(data, status) {
             RSVP_DATA = data;
             check_rsvp_data();
             $(".wrsvp_action").hide();
@@ -299,6 +300,15 @@ $(document).ready(function() {
         show_progress();
         $(".wrsvp_action").hide();
         get_grouplist();
+        return false;
+    });
+
+    $("#admin_show_search").click(function() {
+        show_progress();
+        $(".wrsvp_action").hide();
+        $("#guest_auth .wrsvp_error").text("");
+        $("#guest_auth").show();
+        hide_progress();
         return false;
     });
 

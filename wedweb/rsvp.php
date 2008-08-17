@@ -4,7 +4,7 @@
   header("Expires: -1");
   header("Cache-Control: no-cache, must-revalidate");
 
-  if($_SERVER["SERVER_NAME"] == "localhost" or $_SERVER["SERVER_NAME"] == "192.168.1.193") {
+  if($_SERVER["SERVER_NAME"] == "localhost" or $_SERVER["SERVER_NAME"] == "192.168.1.193" or $_SERVER["SERVER_NAME"] == "aardvark.local") {
     $RSRC_BASE = "/wedding/";
   } else {
     $RSRC_BASE = "/";
@@ -26,8 +26,8 @@
 </div>
 
 <div id="admin_text" style="display: none" class="wrsvp_text">
-<p><b>You are an administrator. You can <a id="admin_logout" href="rsvp.php/admin_logout">log out</a> 
-or <a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a>.</b></p>
+<p><b>You are an administrator. You can <a id="admin_logout" href="rsvp.php/admin_logout">log out</a>,
+<a id="admin_show_grouplist" href="rsvp.php/grouplist">view the guest list</a>, or <a id="admin_show_search" href="rsvp.php/groupsearch">simulate guest login.</a></b></p>
 </div>
 
 <div id="admin_auth" <? if(!$_REQUEST["do_admin"]) { ?>style="display: none" <? } ?>class="wrsvp_action wrsvp_text">
