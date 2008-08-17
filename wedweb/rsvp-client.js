@@ -208,7 +208,11 @@ function find_group(group_id) {
                                 "last_name": $("#guest_auth_last_name").val()},
               function(data, status) {
                   if(!data["success"]){ 
-                      $("#guest_auth .wrsvp_error").text(error_message(data));
+                      var errtxt = error_message(data);
+                      if(IS_ADMIN) {
+                          errtxt = errtxt + "; street=" + data["norm_street"] + "; name=" + data["norm_name"] + "; found_street=" + data["found_street"];
+                      }
+                      $("#guest_auth .wrsvp_error").text(errtxt);
                       hide_progress();
                   } else if(data["gotmulti"]) {
                       $("#guest_auth").hide();

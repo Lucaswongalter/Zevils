@@ -317,10 +317,20 @@ function authenticate_guest($path = array()) {
     $sql = sprintf("SELECT * FROM groups WHERE (street_name='%s' OR street_name LIKE '%% %s')",
                    mysql_real_escape_string($norm_street_name),
                    mysql_real_escape_string($norm_street_name));
+    
     if($group_id) {
       $sql .= sprintf(" AND group_id=%d", $group_id);
     }
     $candidates = sql_fetch_all_hash($sql);
+
+    if(is_admin()) {
+      set_ret("norm_street", $norm_street_name);
+      set_ret("norm_name", $norm_last_name);
+      if($candidates)
+        set_ret("found_street", true);
+      else
+        set_ret("found_street", false);
+    }
     $groups = array();
     $group_people = array();
 
