@@ -152,6 +152,9 @@ function group_checking_perms($group_id = Null) {
 
 function main() {
   ob_start("ob_gzhandler");
+  header("Pragma: no-cache");
+  header("Expires: -1");
+  header("Cache-Control: no-cache, must-revalidate");
   init_db();
   check_session();
   if(is_admin()) {
@@ -260,7 +263,7 @@ function authenticate_admin($path = array()) {
   if($pass and sha1("wrsvp:::$pass") == admin_pass()) {
     set_session("is_admin", 1);
     set_ret("success", True);
-    authenticate_guest();
+    set_ret("is_admin", True);
   } else {
     set_ret("success", False);
     if($pass) {
@@ -691,7 +694,7 @@ function dispatch_request() {
     }
   }
 
-  if($obj == "logout") {
+  if($obj == "admin_logout") {
     set_ret("is_admin", False);
     set_ret("is_guest", False);
     set_ret("action", "logout");

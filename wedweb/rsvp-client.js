@@ -64,6 +64,7 @@ function check_rsvp_data() {
         show_progress();
         $("#admin_text").show();
         $("#guest_auth").hide();
+        $("#admin_auth").hide();
         get_grouplist();
     } else {
         $("#admin_text").hide();
@@ -272,7 +273,7 @@ $(document).ready(function() {
 
     $("#admin_logout").click(function() {
         show_progress();
-        $.getJSON(RSRC_BASE + "rsvp_server.php/logout", function(data, status) {
+        $.getJSON(RSRC_BASE + "rsvp_server.php/admin_logout", function(data, status) {
             RSVP_DATA = data;
             check_rsvp_data();
             $(".wrsvp_action").hide();
@@ -318,11 +319,10 @@ $(document).ready(function() {
                {"admin_pass": $("#admin_pass").val()},
                function(data, status) {
                    RSVP_DATA = data;
-                   check_rsvp_data();
-                   if(data["success"]) {
-                       document.location = RSRC_BASE + "rsvp.php";
-                   } else {
+                   if(!data["success"]) {
                        $("#admin_auth .wrsvp_error").text(error_message(data));
+                   } else {
+                       check_rsvp_data();
                    }
                },
               "json");
