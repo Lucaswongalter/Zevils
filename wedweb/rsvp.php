@@ -147,7 +147,7 @@
           fingerling potatoes, caramelized cipollini, red wine jus.</dd>
 
         <dt>Tomato-Stuffed Zucchini:</dt>
-        <dd>Leek, wild mushroom, and goat cheese strudel with fire-roasted pepper sauce and organic olive oil.</dd>
+        <dd>Roasted vine-ripened red and yellow tomato-stuffed zucchini with pearl mozzarella.</dd>
       </dl>
       <p>If you would like a kid&rsquo;s meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.
     </div>
