@@ -183,10 +183,10 @@ function got_group(data) {
     $("#group .guest_attending").each(fix_meal_picker_state);
     $("#group .guest_attending").change(fix_meal_picker_state);
 
-    $("#group_share_textarea").replaceWith("<textarea id=\"group_share_textarea\" cols=\"80\" rows=\"10\"></textarea>");
+    $("#group_share_textarea").replaceWith("<textarea id=\"group_share_textarea\" rows=\"10\"></textarea>");
     $("#group_share_textarea").val(data["share_details"]);
 
-    $("#group_comments_textarea").replaceWith("<textarea id=\"group_comments_textarea\" cols=\"80\" rows=\"10\"></textarea>");
+    $("#group_comments_textarea").replaceWith("<textarea id=\"group_comments_textarea\" rows=\"10\"></textarea>");
     $("#group_comments_textarea").val(data["comments"]);
 
     fix_share_details_state();

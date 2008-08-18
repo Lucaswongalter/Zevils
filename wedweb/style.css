@@ -247,6 +247,15 @@ dl.inline-dl dd {
 
 /* WRSVP */
 
+textarea {
+   width: 100%;
+}
+
+.wrsvp_action {
+   margin-left: 2em;
+   margin-right: 2em;
+}
+
 .wrsvp_error, .wrsvp_guest_error {
    color: red;
    font-weight: bold;
@@ -260,7 +269,7 @@ dl.inline-dl dd {
 
 .wrsvp_text {
    margin-left: 2em;
-   margin-right: 1em;
+   margin-right: 2em;
 }
 
 .wrsvp_text p {
