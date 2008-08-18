@@ -65,7 +65,7 @@
 
 <div id="group" style="display: none" class="wrsvp_action wrsvp_text">
   <p class="wrsvp_error"></p>
-  <p>If this isn&rsquo;t the party that you&rsquo;d like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
+  <p><b>Please respond by September 25<sup>th</sup>!</b> If this isn&rsquo;t the party that you&rsquo;d like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
   <form method="POST" action="rsvp.php/edit_group" id="group_edit_form">
   </form>
 </div>
@@ -143,8 +143,7 @@
         <dd>Leek, wild mushroom, and goat cheese strudel with fire-roasted pepper sauce and organic olive oil.</dd>
         
         <dt>New York Sirloin:</dt>
-        <dd>Grilled New York sirloin steak served with herb roasted
-          fingerling potatoes, caramelized cipollini, red wine jus.</dd>
+        <dd>Grilled New York sirloin steak served with caramelized cipollini, red wine jus.</dd>
 
         <dt>Tomato-Stuffed Zucchini:</dt>
         <dd>Roasted vine-ripened red and yellow tomato-stuffed zucchini with pearl mozzarella.</dd>
