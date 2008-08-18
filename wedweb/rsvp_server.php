@@ -3,10 +3,15 @@
 $SESSION = array();
 $RET = array();
 
-function get_config_data($key) {
+function get_home_dir() {
   $uid = getmyuid();
   $user_info = posix_getpwuid($uid);
   $home = $user_info["dir"];
+  return $home;
+}
+
+function get_config_data($key) {
+  $home = get_home_dir();
   $data = json_decode(file_get_contents("$home/.wrsvp"), true);
   return $data[$key];
 }
@@ -308,12 +313,13 @@ function authenticate_guest($path = array()) {
                                      $norm_street_name);
     $norm_street_name = preg_replace("/ (STREET|ST|PLACE|PL|PLACE|AVE|AVENUE|DRIVE|DR|COURT|CT|EXPRESSWAY|EXPY|PARKWAY|PKWY|TURNPIKE|TPKE|BLVD|BOULEVARD|BOLEVARD|CIR|CIRCLE|LN|LANE|RD|ROAD|TER|TERR|TERRACE|WAY)\\.?$/", "", $norm_street_name);
     $norm_street_name = preg_replace(array("/\\bTHIRD\\b/",
-                                           "/\\bFOURTH\\b/"),
-                                     array("3RD", "4TH"),
+                                           "/\\bFOURTH\\b/",
+                                           "/\\b7309\\b/"),
+                                     array("3RD", "4TH", "434"),
                                      $norm_street_name);
-    if($norm_street_name == "158TH") {
-      $norm_street_name = "158";
-    }
+    $norm_street_name = preg_replace("/([0-9])(ST|ND|RD|TH)\\b/", "\\1",
+                                     $norm_street_name);
+
     $sql = sprintf("SELECT * FROM groups WHERE (street_name='%s' OR street_name LIKE '%% %s')",
                    mysql_real_escape_string($norm_street_name),
                    mysql_real_escape_string($norm_street_name));
@@ -648,6 +654,35 @@ function export_csv($path) {
     }
 }
 
+function get_dessert_info($path) {
+  $has_privs = false;
+  if(is_admin()) {
+    $has_privs = true;
+  } else if(get_session("view_group")) {
+    $dessert = sql_fetch_one(sprintf("SELECT rehearsal_dessert_invite FROM groups WHERE group_id=%d",
+                                     0+get_session("view_group")));
+    if($dessert) $has_privs = true;
+  }
+
+  header("Content-type: text/html");
+  if(!$has_privs) {
+    print('<p class="wrsvp_error">Dessert info fetch error.</p>');
+  } else {
+    print(file_get_contents(get_home_dir() . "/wrsvp-dessert-info.html"));
+  }
+  exit();
+}
+
+function get_wedding_info($path) {
+  header("Content-type: text/html");
+  if(is_admin() or get_session("view_group")) {
+    print(file_get_contents(get_home_dir() . "/wrsvp-wedding-info.html"));
+  } else {
+    print('<p class="wrsvp_error">Wedding info fetch error.</p>');
+  }
+  exit();
+}
+
 function export_rss($path) {
   $rsspass = $_REQUEST["rssauth"];
   if(!is_admin() and (!$rsspass or sha1("wrsvp:::$rsspass") != rss_pass())) {
@@ -731,6 +766,10 @@ function dispatch_request() {
   } else if($obj == "rss2") {
     export_rss($path);
     exit();
+  } else if($obj == "dessert_info") {
+    get_dessert_info($path);
+  } else if($obj == "wedding_info") {
+    get_wedding_info($path);
   } else if($obj) {
     set_ret("action", "UNKNOWN");
     set_ret("error", $obj);

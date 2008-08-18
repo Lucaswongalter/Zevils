@@ -192,6 +192,8 @@ function got_group(data) {
     fix_share_details_state();
     $("#group_wants_share").change(fix_share_details_state);
 
+    $("#wrsvp_tabstrip > ul").tabs();
+
     $("#group").show();
 }
 

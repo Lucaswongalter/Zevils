@@ -126,25 +126,32 @@
   <p class="wrsvp_success"></p>
   <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Update Responses"></p>
 
-  <h3><span class="subheader-text all-header-text">About the Entr&eacute;e Selections</span></h3>
-  <dl class="wrsvp-dl">
-    <dt>Basil and Pine Nut-Crusted Sea Bass:</dt>
-    <dd>Basil and pine nut-crusted sea bass atop saffron orzo risotto,
-    roasted tomato sauce.</dd>
+  <h3><span class="subheader-text all-header-text">Information for Guests</span></h3>
+  <div id="wrsvp_tabstrip">
+    <ul>
+      <li><a href="#rsvp-tab-entree-info"><span>Entr&eacute;e Selections</span></a></li>
+      {if RSVP_DATA["dessert_invite"]}<li><a href="<? echo $RSRC_BASE; ?>rsvp_server.php/dessert_info"><span>Rehearsal Dessert Party</span></a></li>{/if}
+      <li><a href="<? echo $RSRC_BASE; ?>rsvp_server.php/wedding_info"><span>Ceremony and Reception</span></a></li>
+    </ul>
+    <div id="rsvp-tab-entree-info">
+      <dl class="wrsvp-dl">
+        <dt>Basil Sea Bass:</dt>
+        <dd>Basil and pine nut-crusted sea bass atop saffron orzo risotto,
+          roasted tomato sauce.</dd>
 
-    <dt>Entree TBD:</dt>
-    <dd>Consectetur adipsicing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.</dd>
+        <dt>Leek Strudel:</dt>
+        <dd>Leek, wild mushroom, and goat cheese strudel with fire-roasted pepper sauce and organic olive oil.</dd>
+        
+        <dt>New York Sirloin:</dt>
+        <dd>Grilled New York sirloin steak served with herb roasted
+          fingerling potatoes, caramelized cipollini, red wine jus.</dd>
 
-    <dt>Mediterranean Vegetable Purse:</dt>
-    <dd>Couscous and fresh vegetables in phyllo over fire-roasted red
-    pepper coulis.</dd>
-
-    <dt>New York Sirloin:</dt>
-    <dd>Grilled New York sirloin steak served with herb roasted
-    fingerling potatoes, caramelized cipollini, red wine jus.</dd>
-  </dl>
-  <p>If you would like a kid&rsquo;s meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.</span>
-
+        <dt>Tomato-Stuffed Zucchini:</dt>
+        <dd>Leek, wild mushroom, and goat cheese strudel with fire-roasted pepper sauce and organic olive oil.</dd>
+      </dl>
+      <p>If you would like a kid&rsquo;s meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.
+    </div>
+  </div>
 </textarea>
 
 <div id="grouplist" style="display: none" class="wrsvp_action wrsvp_text">
