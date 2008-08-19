@@ -127,7 +127,7 @@
   <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Update Responses"></p>
 
   <h3><span class="subheader-text all-header-text">Information for Guests</span></h3>
-  <div id="wrsvp_tabstrip">
+  <div id="wrsvp_tabstrip" class="tabstrip">
     <ul>
       <li><a href="#rsvp-tab-entree-info"><span>Entr&eacute;e Selections</span></a></li>
       {if RSVP_DATA["dessert_invite"]}<li><a href="<? echo $RSRC_BASE; ?>rsvp_server.php/dessert_info"><span>Rehearsal Dessert Party</span></a></li>{/if}
@@ -167,7 +167,16 @@
       </ul></li>
     <li><a href="rsvp_server.php/csv" id="csv_export">Download spreadsheet</a></li>
     <li><a href="rsvp_server.php/rss" id="rss_link">Get RSS link</a></li>
-    <li>Guests:
+  </ul>
+  <div id="wrsvp_grouplist_tabstrip" class="tabstrip">
+    <ul>
+      <li><a href="#grouplist_groups"><span>Guest List</span></a></li>
+      <li><a href="#grouplist_share"><span>Sharing Requests</span></a></li>
+      <li><a href="#grouplist_comments"><span>Comments</span></a></li>
+      <li><a href="#grouplist_changes"><span>Recent Responses</span></a></li>
+    </ul>
+    <div id="grouplist_groups">
+      <h4>Guest List</h4>
       <ul>{for group in RSVP_DATA["groups"]}
         <li><a href="rsvp.php/group/edit" class="grouplist_multi" id="grouplist_multi_${group["id"]}">${group["street"]}</a>:
           ({if !group["dessert_invite"]}<b>NOT&nbsp;</b>{/if}invited to dessert):
@@ -178,8 +187,44 @@
               {/if}
               ${guest["meal"]|default:"no meal selection"}</li>{/for}
         </ul></li>{/for}
-      </ul></li>
-  </ul>
+      </ul>
+    </div>
+    {macro prettyJoinList(theList)}
+      {if theList.length == 1}
+        ${theList[0]["name"]}:
+      {elseif theList.length == 2}
+        ${theList[0]["name"]} and ${theList[1]["name"]}:
+      {else}
+        {for name in theList}
+          {if name_index >= theList.length - 1}
+            and&nbsp;${name["name"]}:
+          {else}
+            ${name["name"]},&nbsp;
+          {/if}
+        {/for}
+      {/if}
+    {/macro}
+    <div id="grouplist_share">
+      <h4>Sharing Requests</h4>
+      <ul>{for group in RSVP_DATA["groups"]}
+        {if group["wants_share"] == "1"}
+          <li>${prettyJoinList(group["guests"])} <pre id="grouplist_group_${group["id"]}_share_details"></pre></li>
+        {/if}
+      {/for}</ul>
+    </div>
+    <div id="grouplist_comments">
+      <h4>Comments</h4>
+      <ul>{for group in RSVP_DATA["groups"]}
+        {if group["comments"] != ""}
+          <li>${prettyJoinList(group["guests"])} <pre id="grouplist_group_${group["id"]}_comments"></pre></li>
+        {/if}
+      {/for}</ul>
+    </div>
+    <div id="grouplist_changes">
+      <h4>Recent Responses</h4>
+      <div id="grouplist_changes_content">Loading changes...</div>
+    </div>
+  </div>
 </textarea>
 
 <? include("footer.inc"); ?>

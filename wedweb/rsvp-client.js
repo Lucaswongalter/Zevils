@@ -84,6 +84,27 @@ function get_grouplist() {
         var result = TrimPath.processDOMTemplate("grouplist_template", data);
         $("#grouplist").html(result);
 
+        $("#wrsvp_grouplist_tabstrip > ul").tabs();
+        $("#wrsvp_grouplist_tabstrip > .ui-tabs-nav").bind("tabsselect", function(event, ui) {
+            if(ui.index == 3) {
+                $("#wrsvp_grouplist_tabstrip > .ui-tabs-nav").unbind("tabsselect");
+                $.getJSON(RSRC_BASE + "rsvp_server.php/web_changelist", function(data, status) {
+                    RSVP_DATA = data;
+                    var template = TrimPath.parseTemplate('<ul class="wrsvp_changes">{for change in RSVP_DATA["changes"]}<li>Change #${change["id"]} @ ${change["time"]}: ${change["text"]}</li>{/for}</ul>', "web_changelist_template");
+                    var result = template.process(data);
+                    $("#grouplist_changes_content").html(result);
+                });
+            }
+            return true;
+        });
+
+        for(var n in data["groups"]) {
+            var group = data["groups"][n];
+            var el_prefix = "#grouplist_group_" + group["id"];
+            if(group["wants_share"] == "1") $(el_prefix + "_share_details").text(group["share_details"]);
+            if(group["comments"] != "") $(el_prefix + "_comments").text(group["comments"]);
+        }
+
         $("#rss_link").click(function() {
             var pass = prompt("Please enter the RSS password");
             if(pass) {

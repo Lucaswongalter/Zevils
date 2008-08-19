@@ -441,7 +441,10 @@ function list_groups($path) {
     $ret_groups[] = array("id" => $group["group_id"],
                           "street" => $group["street_name"],
                           "dessert_invite" => $dessert_invite,
-                          "guests" => transform_guests_for_ret($guests, true));
+                          "guests" => transform_guests_for_ret($guests, true),
+                          "wants_share" => $group["wants_share"],
+                          "share_details" => $group["share_details"],
+                          "comments" => $group["comments"]);
     foreach($guests as $guest) {
       $total++;
       $attending = db_bool_to_php($guest["attending"]);
@@ -683,6 +686,25 @@ function get_wedding_info($path) {
   exit();
 }
 
+function get_web_changelist($path) {
+  set_ret("action", "web_changelist");
+  if(!is_admin()) {
+    set_ret("success", false);
+    set_ret("error", "noauth");
+    return;
+  }
+
+  $ret_changes = array();
+  $changes = sql_fetch_all_hash("SELECT change_id, change_time, change_text FROM changes ORDER BY change_time DESC LIMIT 200");
+  foreach($changes as $change) {
+      
+    $ret_changes[] = array("id" => $change["change_id"],
+                           "text" => $change["change_text"],
+                           "time" => $change["change_time"]);
+  }
+  set_ret("changes", $ret_changes);
+}
+
 function export_rss($path) {
   $rsspass = $_REQUEST["rssauth"];
   if(!is_admin() and (!$rsspass or sha1("wrsvp:::$rsspass") != rss_pass())) {
@@ -766,6 +788,8 @@ function dispatch_request() {
   } else if($obj == "rss2") {
     export_rss($path);
     exit();
+  } else if($obj == "web_changelist") {
+    get_web_changelist($path);
   } else if($obj == "dessert_info") {
     get_dessert_info($path);
   } else if($obj == "wedding_info") {

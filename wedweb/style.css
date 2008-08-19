@@ -323,6 +323,9 @@ textarea {
    padding: 0;
 }
 
+.wrsvp_changes > li {
+   padding-bottom: 1ex;
+}
 
 /* Tab stuff -- adapted from jQuery UI's Flora theme */
 
