@@ -327,6 +327,11 @@ textarea {
    padding-bottom: 1ex;
 }
 
+.wrsvp_response_deadline {
+   font-weight: bold;
+   text-align: center;
+}
+
 /* Tab stuff -- adapted from jQuery UI's Flora theme */
 
 /* Skin */

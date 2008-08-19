@@ -184,6 +184,7 @@ function got_group(data) {
     $("#group_edit_form").html(result);
     $("#group .wrsvp_error").text("");
 
+/*
     $("#group_all_attending_dessert").click(function() {
       set_all_guests(true, true);
       return false;
@@ -200,6 +201,7 @@ function got_group(data) {
       set_all_guests(false, false);
       return false;
     });
+*/
 
     $("#group .guest_attending").each(fix_meal_picker_state);
     $("#group .guest_attending").change(fix_meal_picker_state);

@@ -39,6 +39,7 @@
 </div>
 
 <div id="guest_auth" class="wrsvp_action wrsvp_text"<? if($_REQUEST["do_admin"]) { ?> style="display: none"<? } ?>>
+<p class="wrsvp_response_deadline">Please respond by September 25<sup>th</sup>!</p>
 <p class="wrsvp_error"></p>
 <p>To respond to your invitation, please provide your <b>last name</b> and the
    <b>name of the street</b> (or P.O. box number) to which your invitation was sent (for instance, if your
@@ -65,7 +66,8 @@
 
 <div id="group" style="display: none" class="wrsvp_action wrsvp_text">
   <p class="wrsvp_error"></p>
-  <p><b>Please respond by September 25<sup>th</sup>!</b> If this isn&rsquo;t the party that you&rsquo;d like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
+  <p>If this isn&rsquo;t the party that you&rsquo;d like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
+  <p class="wrsvp_response_deadline">Please respond by September 25<sup>th</sup>!</p>
   <form method="POST" action="rsvp.php/edit_group" id="group_edit_form">
   </form>
 </div>
@@ -94,6 +96,7 @@
     </select></td>
     <td class="wrsvp_guest_error" style="display: none"></td>
     </tr>{/for}
+<!--
     {if RSVP_DATA["guests"].length > 1}
     <tr>
         <td></td>
@@ -106,6 +109,7 @@
         <td><input type="button" id="group_all_attending" value="Everybody&rsquo;s Attending"></td>
     </tr>
     {/if}
+-->
   </table>
   <p>Are you interested in sharing transportation or lodging with
   other guests? <select id="group_wants_share">
