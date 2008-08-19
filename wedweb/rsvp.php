@@ -66,16 +66,17 @@
 
 <div id="group" style="display: none" class="wrsvp_action wrsvp_text">
   <p class="wrsvp_error"></p>
-  <p>If this isn&rsquo;t the party that you&rsquo;d like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
+  <p id="wrsvp_guest_reauth">If this isn&rsquo;t the party that you&rsquo;d like to respond for, <a href="rsvp.php/logout" id="guest_auth_logout">find a different reservation</a>.</p>
   <p class="wrsvp_response_deadline">Please respond by September 25<sup>th</sup>!</p>
   <form method="POST" action="rsvp.php/edit_group" id="group_edit_form">
   </form>
 </div>
 <textarea id="group_template" style="display: none">
+  <div id="wrsvp_group_controls">
   {if IS_ADMIN}<p>Street Name: <input type="text" length="20" id="group_street" value="${RSVP_DATA["group_street"]}"></p>
   <p>Guests:</p>{/if}
-  <table class="wrsvp_form">
-  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Attending Rehearsal Dessert Party?</th>{/if}<th>Attending Wedding?</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
+  <table class="wrsvp_form wrsvp_group_group">
+  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Rehearsal Dessert Party</th>{/if}<th class="wrsvp_col_groupright">Wedding/Reception</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
     <tr class="guest" id="guest_${guest["id"]}">
     <td class="guest_name">${guest["name"]}</td>
     {if RSVP_DATA["dessert_invite"]}
@@ -85,7 +86,7 @@
       <option value="1"{if guest["attending_dessert"] == "1"} selected{/if}>Attending Dessert Party</option>
     </select></td>
     {/if}
-    <td><select class="guest_attending">
+    <td class="wrsvp_col_groupright"><select class="guest_attending">
       <option value=""{if guest["attending"] == ""} selected{/if}>No Response for Wedding</option>
       <option value="0"{if guest["attending"] == "0"} selected{/if}>Not Attending Wedding</option>
       <option value="1"{if guest["attending"] == "1"} selected{/if}>Attending Wedding</option>
@@ -111,7 +112,9 @@
     {/if}
 -->
   </table>
-  <p>Are you interested in sharing transportation or lodging with
+
+  <div class="wrsvp_group_group">
+  <p>Are you interested in <b>sharing transportation or lodging</b> with
   other guests? <select id="group_wants_share">
     <option value=""{if RSVP_DATA["wants_share"] == "0"} selected{/if}>No</option>
     <option value="true"{if RSVP_DATA["wants_share"] == "1"} selected{/if}>Yes</option>
@@ -120,15 +123,16 @@
     <p>Please give us details such as where you&rsquo;re coming from, your travel dates, and what you&rsquo;re looking for / offering; we&rsquo;ll do what we can.  Also, please provide an email address where we, and other guests we may want to put in contact with you, can reach you.</p>
     <div id="group_share_textarea"></div>
   </div>
-  <div id="group_comments">
-    <p>If you have any comments or questions, you
-    can <a href="mailto:us@sachsfam.org">email us</a> or provide them
-    here.  If you&rsquo;d like a response, please let us know how to contact you.</p>
+  </div>
+
+  <div id="group_comments" class="wrsvp_group_group">
+    <p><b>Comments:</b></p>
     <div id="group_comments_textarea"></div>
   </div>
   
   <p class="wrsvp_success"></p>
   <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Update Responses"></p>
+  </div>
 
   <h3><span class="subheader-text all-header-text">Information for Guests</span></h3>
   <div id="wrsvp_tabstrip" class="tabstrip">

@@ -323,6 +323,27 @@ textarea {
    padding: 0;
 }
 
+#wrsvp_guest_reauth { text-align: center; }
+
+#wrsvp_group_controls {
+   border: thin solid #cc6600;
+   padding-left: 1em;
+   padding-right: 1em;
+   padding-bottom: 0.5em;
+}
+
+.wrsvp_form th, .wrsvp_form td {
+   padding-right: 2em;
+}
+.wrsvp_form th.wrsvp_col_groupright, .wrsvp_form td.wrsvp_col_groupright {
+   padding-right: 0;
+}
+
+.wrsvp_group_group {
+   padding-top: 1.5em;
+}
+
+
 .wrsvp_changes > li {
    padding-bottom: 1ex;
 }
