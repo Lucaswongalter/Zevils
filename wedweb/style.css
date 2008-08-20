@@ -333,7 +333,7 @@ textarea {
 }
 
 .wrsvp_form th, .wrsvp_form td {
-   padding-right: 1em;
+   padding-right: 1.5em;
 }
 .wrsvp_form th.wrsvp_col_groupright, .wrsvp_form td.wrsvp_col_groupright {
    padding-right: 0;

@@ -76,20 +76,21 @@
   {if IS_ADMIN}<p>Street Name: <input type="text" length="20" id="group_street" value="${RSVP_DATA["group_street"]}"></p>
   <p>Guests:</p>{/if}
   <table class="wrsvp_form wrsvp_group_group">
-  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Rehearsal Dessert Party</th>{/if}<th class="wrsvp_col_groupright">Wedding/Reception</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
+  <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Dessert
+  Party</th>{/if}<th class="wrsvp_col_groupright">Wedding &amp;<br>Reception</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
     <tr class="guest" id="guest_${guest["id"]}">
     <td class="guest_name">${guest["name"]}</td>
     {if RSVP_DATA["dessert_invite"]}
     <td><select class="guest_attending_dessert">
-      <option value=""{if guest["attending_dessert"] == ""} selected{/if}>No Response for Dessert Party</option>
-      <option value="0"{if guest["attending_dessert"] == "0"} selected{/if}>Not Attending Dessert Party</option>
-      <option value="1"{if guest["attending_dessert"] == "1"} selected{/if}>Attending Dessert Party</option>
+      <option value=""{if guest["attending_dessert"] == ""} selected{/if}>No Response</option>
+      <option value="0"{if guest["attending_dessert"] == "0"} selected{/if}>Not Attending</option>
+      <option value="1"{if guest["attending_dessert"] == "1"} selected{/if}>Attending</option>
     </select></td>
     {/if}
     <td class="wrsvp_col_groupright"><select class="guest_attending">
-      <option value=""{if guest["attending"] == ""} selected{/if}>No Response for Wedding</option>
-      <option value="0"{if guest["attending"] == "0"} selected{/if}>Not Attending Wedding</option>
-      <option value="1"{if guest["attending"] == "1"} selected{/if}>Attending Wedding</option>
+      <option value=""{if guest["attending"] == ""} selected{/if}>No Response</option>
+      <option value="0"{if guest["attending"] == "0"} selected{/if}>Not Attending</option>
+      <option value="1"{if guest["attending"] == "1"} selected{/if}>Attending</option>
     </select></td>
     <td><select class="guest_meal">
       <option value=""{if !guest["meal"]} selected{/if}>No Selection</option>{for meal in RSVP_DATA["meal_options"]}
