@@ -10,13 +10,15 @@ function emailLinkify(ciphertext, pad, elt_id) {
 	   plaintext += String.fromCharCode(ciphertext.charCodeAt(i) ^ pad.charCodeAt(i));
     }
     elt.wrapInner('<a href="#">');
-    $(elt_id + " > a").click(function() {
-	   window.location="mail\u0074o\u003a" + plaintext;
-    });
+    $(elt_id + " > a").attr("href", "mailto:" + plaintext);
+}
+
+function readyCommon() {
+    emailLinkify('BVQH3ARCMT6YBV8', '7%25%11%3BR%22%3A0+5%5Bw-%24_', '#footer-email');
 }
 
 $(document).ready(function() {
-    emailLinkify('BVQH3ARCMT6YBV8', '7%25%11%3BR%22%3A0+5%5Bw-%24_', '#footer-email');
+    readyCommon();
     emailLinkify('3R8G8FDYXAIRPDRT3', '_%3BB%07Z*%25%3A35%2809j1%3B%5E', '#liz-email');
     emailLinkify('4Q66XVBS45KDVES5V2M', 'Y0BB0354tO.2%3F%29%20%1B5%5D%20', '#matthew-email');
     emailLinkify('2Y483RQYXAFFZQPDSKITC2J', 'U0R%5E%5C%2053%1823%22%3E4%3E%28%3A%25%22z-W%3E', '#jean-email');

@@ -292,6 +292,7 @@ $.getJSON(RSRC_BASE + "rsvp_server.php", function(data, status) {
 });
 
 $(document).ready(function() {
+    readyCommon();
     IS_READY = true;
 
     show_progress();
