@@ -4,6 +4,13 @@
   header("Expires: -1");
   header("Cache-Control: no-cache, must-revalidate");
 
+  if($_SERVER["PATH_INFO"]) {
+    header("Location: http://w.sachsfam.org/rsvp.php");
+    header("Content-type: text/html");
+    print("This page has moved <a href='http://w.sachsfam.org/rsvp.php'>here.</a>  You will be redirected.");
+    exit();
+  }
+
   if($_SERVER["SERVER_NAME"] == "localhost" or $_SERVER["SERVER_NAME"] == "192.168.1.193" or $_SERVER["SERVER_NAME"] == "aardvark.local") {
     $RSRC_BASE = "/wedding/";
   } else {
