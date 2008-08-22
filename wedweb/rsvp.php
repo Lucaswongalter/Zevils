@@ -232,7 +232,7 @@
       <h4>Comments</h4>
       <ul>{for group in RSVP_DATA["groups"]}
         {if group["comments"] != ""}
-          <li>${prettyJoinList(group["guests"])} <pre id="grouplist_group_${group["id"]}_comments"></pre></li>
+          <li>${prettyJoinList(group["guests"])} <blockquote id="grouplist_group_${group["id"]}_comments"></blockquote></li>
         {/if}
       {/for}</ul>
     </div>

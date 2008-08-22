@@ -102,7 +102,16 @@ function get_grouplist() {
             var group = data["groups"][n];
             var el_prefix = "#grouplist_group_" + group["id"];
             if(group["wants_share"] == "1") $(el_prefix + "_share_details").text(group["share_details"]);
-            if(group["comments"] != "") $(el_prefix + "_comments").text(group["comments"]);
+            if(group["comments"] != "") {
+                var comment_paras = group["comments"].split("\n\n");
+                var comment_parent = $(el_prefix + "_comments");
+                for(var i in comment_paras) {
+                    var comment_para = comment_paras[i];
+                    var para_node = $(document.createElement("p"));
+                    para_node.text(comment_para);
+                    comment_parent.append(para_node);
+                }
+            }
         }
 
         $("#rss_link").click(function() {
