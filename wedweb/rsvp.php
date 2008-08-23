@@ -224,7 +224,7 @@
       <h4>Sharing Requests</h4>
       <ul>{for group in RSVP_DATA["groups"]}
         {if group["wants_share"] == "1"}
-          <li>${prettyJoinList(group["guests"])} <pre id="grouplist_group_${group["id"]}_share_details"></pre></li>
+          <li>${prettyJoinList(group["guests"])} <blockquote id="grouplist_group_${group["id"]}_share_details"></blockquote></li>
         {/if}
       {/for}</ul>
     </div>

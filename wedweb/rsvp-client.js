@@ -55,6 +55,16 @@ function extract_id(id) {
     return matches[1];
 }
 
+function paralize_raw_text(text, container) {
+    var paras = text.split("\n\n");
+    for(var i in paras) {
+        var para = paras[i];
+        var node = $(document.createElement("p"));
+        node.text(para);
+        container.append(node);
+    }
+}
+
 function check_rsvp_data() {
     if(!RSVP_DATA || !IS_READY) return;
 
@@ -101,17 +111,10 @@ function get_grouplist() {
         for(var n in data["groups"]) {
             var group = data["groups"][n];
             var el_prefix = "#grouplist_group_" + group["id"];
-            if(group["wants_share"] == "1") $(el_prefix + "_share_details").text(group["share_details"]);
-            if(group["comments"] != "") {
-                var comment_paras = group["comments"].split("\n\n");
-                var comment_parent = $(el_prefix + "_comments");
-                for(var i in comment_paras) {
-                    var comment_para = comment_paras[i];
-                    var para_node = $(document.createElement("p"));
-                    para_node.text(comment_para);
-                    comment_parent.append(para_node);
-                }
-            }
+            if(group["wants_share"] == "1")
+                paralize_raw_text(group["share_details"], $(el_prefix + "_share_details"));
+            if(group["comments"] != "")
+                paralize_raw_text(group["comments"], $(el_prefix + "_comments"));
         }
 
         $("#rss_link").click(function() {
