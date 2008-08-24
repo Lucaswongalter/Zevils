@@ -388,7 +388,6 @@ $(document).ready(function() {
         var data = {};
         show_progress();
         $("#group .wrsvp_error").text("");
-        if(IS_ADMIN) data["street"] = $("#group_street").val();
         data["wants_share"] = $("#group_wants_share > option:selected").val();
         data["share_details"] = $("#group_share_details > textarea").val();
         data["comments"] = $("#group_comments > textarea").val();
