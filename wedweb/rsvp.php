@@ -80,8 +80,6 @@
 </div>
 <textarea id="group_template" style="display: none">
   <div id="wrsvp_group_controls">
-  {if IS_ADMIN}<p>Street Name: <input type="text" length="20" id="group_street" value="${RSVP_DATA["group_street"]}"></p>
-  <p>Guests:</p>{/if}
   <table class="wrsvp_form wrsvp_group_group">
   <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Dessert
   Party</th>{/if}<th class="wrsvp_col_groupright">Wedding &amp;<br>Reception</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
