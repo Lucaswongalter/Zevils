@@ -311,7 +311,7 @@ function authenticate_guest($path = array()) {
     $norm_street_name = preg_replace("/^([0-9]+) (.*) (N|S|E|W|NW|SW|SE)$/",
                                      "\\1 \\3 \\2",
                                      $norm_street_name);
-    $norm_street_name = preg_replace("/\\b(P\\.O\\. )?BOX\\b ?/", "",
+    $norm_street_name = preg_replace("/\\b(P\\.O\\. )?BOX\\b ?#?/", "",
                                      $norm_street_name);
     $norm_street_name = preg_replace("/ (STREET|ST|PLACE|PL|PLACE|AVE|AVENUE|DRIVE|DR|COURT|CT|EXPRESSWAY|EXPY|PARKWAY|PKWY|TURNPIKE|TPKE|BLVD|BOULEVARD|BOLEVARD|CIR|CIRCLE|LN|LANE|RD|ROAD|TER|TERR|TERRACE|WAY)\\.?$/", "", $norm_street_name);
     $norm_street_name = preg_replace(array("/\\bTHIRD\\b/",
