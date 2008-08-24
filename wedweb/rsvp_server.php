@@ -393,7 +393,7 @@ function display_group($path) {
   $group_id = 0 + $group["group_id"];
 
   $people = sql_fetch_all_hash(sprintf("SELECT * FROM people WHERE group_id=%d ORDER BY name", $group_id));
-  $meals = sql_fetch_all_hash("SELECT * FROM meals ORDER BY name");
+  $meals = sql_fetch_all_hash("SELECT * FROM meals ORDER BY meal_order");
 
   $ret_meals = array();
   foreach($meals as $meal) {
@@ -423,7 +423,7 @@ function list_groups($path) {
   $groups = sql_fetch_all_hash("SELECT * FROM groups ORDER BY street_name, group_id");
 
   $meal_counts = array();
-  $meals = sql_fetch_all_hash("SELECT * FROM meals ORDER BY name");
+  $meals = sql_fetch_all_hash("SELECT * FROM meals ORDER BY meal_order");
   $meals_ret = array();
   $meal_map = meal_map();
   $meals_ret[] = "No Selection";
@@ -501,13 +501,6 @@ function edit_group($path) {
 
   
   $group_changed_cols = array();
-  if(is_admin() and $data["street"] and $group["street_name"] != $data["street"]) {
-    $group_changed_cols[] = sprintf("street_name=upper('%s')",
-                                    mysql_real_escape_string($data["street"]));
-    $deltas[] = sprintf("<li>Street name: %s &rarr; %s</li>",
-                        htmlspecialchars($group["street_name"]),
-                        htmlspecialchars($data["street"]));
-  }
 
   $wants_share_bool = 0;
   if($data["wants_share"]) $wants_share_bool = 1;

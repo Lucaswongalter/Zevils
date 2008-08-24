@@ -79,9 +79,11 @@
       <script src="<? echo $RSRC_BASE; ?>jquery-ui-wedweb-1.6b.min.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>jquery.json.min.js" type="text/javascript"></script>
       <script src="<? echo $RSRC_BASE; ?>trimpath-template.js" type="text/javascript"></script>
-      <script src="<? echo $RSRC_BASE; ?>rsvp-client.js" type="text/javascript"></script>
     <? } ?>
     <script src="<? echo $RSRC_BASE; ?>header.js" type="text/javascript"></script>
+    <? if($WEBPAGE_FILE == "rsvp.php") { ?>
+      <script src="<? echo $RSRC_BASE; ?>rsvp-client.js" type="text/javascript"></script>
+    <? } ?>
 </head>
 <body>
 <div id="page">

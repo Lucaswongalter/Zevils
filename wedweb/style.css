@@ -329,7 +329,8 @@ textarea {
    border: thin solid #cc6600;
    padding-left: 1em;
    padding-right: 1em;
-   padding-bottom: 0.5em;
+   margin-top: 1.5ex;
+   padding-bottom: 0.5ex;
 }
 
 .wrsvp_form th, .wrsvp_form td {

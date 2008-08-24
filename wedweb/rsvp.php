@@ -151,18 +151,18 @@
     </ul>
     <div id="rsvp-tab-entree-info">
       <dl class="wrsvp-dl">
-        <dt>Basil Sea Bass:</dt>
-        <dd>Basil and pine nut-crusted sea bass atop saffron orzo risotto,
-          roasted tomato sauce.</dd>
+        <dt>Stuffed Zucchini:</dt>
+        <dd>Roasted vine-ripened red and yellow tomato-stuffed zucchini with pearl mozzarella.</dd>
 
         <dt>Leek Strudel:</dt>
         <dd>Leek, wild mushroom, and goat cheese strudel with fire-roasted pepper sauce and organic olive oil.</dd>
         
+        <dt>Basil Sea Bass:</dt>
+        <dd>Basil and pine nut-crusted sea bass atop saffron orzo risotto,
+          roasted tomato sauce.</dd>
+
         <dt>New York Sirloin:</dt>
         <dd>Grilled New York sirloin steak served with caramelized cipollini, red wine jus.</dd>
-
-        <dt>Tomato-Stuffed Zucchini:</dt>
-        <dd>Roasted vine-ripened red and yellow tomato-stuffed zucchini with pearl mozzarella.</dd>
       </dl>
       <p>If you would like a kid&rsquo;s meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.
     </div>

@@ -1,5 +1,6 @@
 CREATE TABLE meals (
        meal_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+       meal_order INTEGER NOT NULL DEFAULT 0,
        name VARCHAR(255) NOT NULL
 );
 
