@@ -363,6 +363,7 @@ $(document).ready(function() {
                    RSVP_DATA = data;
                    if(!data["success"]) {
                        $("#admin_auth .wrsvp_error").text(error_message(data));
+                       hide_progress();
                    } else {
                        check_rsvp_data();
                    }
