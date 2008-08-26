@@ -317,8 +317,15 @@ function authenticate_guest($path = array()) {
     $norm_street_name = preg_replace(array("/\\bTHIRD\\b/",
                                            "/\\bFOURTH\\b/",
                                            "/\\b7309\\b/",
-                                           "/\\b7450\\b/"),
-                                     array("3RD", "4TH", "434", "WASHINGTON"),
+                                           "/\\b7450\\b/",
+                                           "/(\\bR(OO)?M\\.? ?)?\\b912A?\\b/",
+                                           "/(\\b(W ?)?519 )?\\bJESTER\\b/"),
+                                     array("3RD",
+                                           "4TH",
+                                           "434",
+                                           "WASHINGTON",
+                                           "GUADALUPE",
+                                           "21ST"),
                                      $norm_street_name);
     $norm_street_name = preg_replace("/([0-9])(ST|ND|RD|TH)\\b/", "\\1",
                                      $norm_street_name);
