@@ -80,6 +80,7 @@
 </div>
 <textarea id="group_template" style="display: none">
   <div id="wrsvp_group_controls">
+  <p><input type="submit" name="group_edit_submit_1" class="group_edit_submit" value="Update Responses"></p>
   <table class="wrsvp_form wrsvp_group_group">
   <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Dessert
   Party</th>{/if}<th class="wrsvp_col_groupright">Wedding &amp;<br>Reception</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
@@ -137,7 +138,7 @@
   </div>
   
   <p class="wrsvp_success"></p>
-  <p><input type="submit" name="group_edit_submit" id="group_edit_submit" value="Update Responses"></p>
+  <p><input type="submit" name="group_edit_submit_2" class="group_edit_submit" value="Update Responses"></p>
   </div>
 
   <h3><span class="subheader-text all-header-text">Information for Guests</span></h3>
@@ -160,9 +161,13 @@
           roasted tomato sauce.</dd>
 
         <dt>New York Sirloin:</dt>
-        <dd>Grilled New York sirloin steak served with caramelized cipollini, red wine jus.</dd>
+        <dd>Grilled New York sirloin steak served with caramelized
+        cipollini, red wine jus.</dd>
+
+        <dt>Kid&rsquo;s Meal</dt>
       </dl>
-      <p>If you would like a kid&rsquo;s meal, or have any special dietary needs or other requests, please <a href="mailto:us@sachsfam.org">contact us</a>.
+      <p>If you have any special dietary needs or other requests,
+      select 'Other' for your entr&eacute;e and say something in the Comments section.</p>
     </div>
   </div>
 </textarea>
