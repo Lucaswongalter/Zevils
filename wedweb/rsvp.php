@@ -80,7 +80,7 @@
 </div>
 <textarea id="group_template" style="display: none">
   <div id="wrsvp_group_controls">
-  <p><input type="submit" name="group_edit_submit_1" class="group_edit_submit" value="Update Responses"></p>
+  <p><input type="submit" name="group_edit_submit_1" class="group_edit_submit" value="Submit Responses"></p>
   <table class="wrsvp_form wrsvp_group_group">
   <tr><th>Name</th>{if RSVP_DATA["dessert_invite"]}<th>Dessert
   Party</th>{/if}<th class="wrsvp_col_groupright">Wedding &amp;<br>Reception</th><th>Entr&eacute;e</th></tr>{for guest in RSVP_DATA["guests"]}
@@ -138,7 +138,7 @@
   </div>
   
   <p class="wrsvp_success"></p>
-  <p><input type="submit" name="group_edit_submit_2" class="group_edit_submit" value="Update Responses"></p>
+  <p><input type="submit" name="group_edit_submit_2" class="group_edit_submit" value="Submit Responses"></p>
   </div>
 
   <h3><span class="subheader-text all-header-text">Information for Guests</span></h3>

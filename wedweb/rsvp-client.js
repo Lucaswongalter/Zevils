@@ -196,6 +196,36 @@ function got_group(data) {
     $("#group_edit_form").html(result);
     $("#group .wrsvp_error").text("");
 
+    var isInitialResponse = true;
+    var pluralResponse = false;
+
+    if(data["guests"].length > 1) pluralResponse = true;
+    for(guest in data["guests"]) {
+        var guest_data = data["guests"][guest];
+        if((guest_data["attending"] != "") || (guest_data["attending_dessert"] != "")) {
+            isInitialResponse = false;
+        }
+    }
+
+    var buttonText = "";
+    var confirmText = "";
+    if(isInitialResponse) {
+        buttonText = "Submit Response";
+        confirmText = "sent in your answer";
+    } else {
+        buttonText = "Update Response";
+        confirmText = "updated your answer";
+    }
+    if(pluralResponse) {
+        buttonText = buttonText + "s";
+        confirmText = confirmText + "s";
+    }
+
+    $(".group_edit_submit").val(buttonText);
+    $.protectData.message = "You haven't " + confirmText + " by clicking '" + buttonText + "'! If you close or refresh this page without clicking that button, your changes won't get saved.";
+
+
+
 /*
     $("#group_all_attending_dessert").click(function() {
       set_all_guests(true, true);
@@ -314,6 +344,7 @@ $(document).ready(function() {
     });
 
     $("#admin_logout").click(function() {
+        $.protectData.unprotect();
         show_progress();
         $.getJSON(RSRC_BASE + "rsvp_server.php/admin_logout", function(data, status) {
             RSVP_DATA = data;
@@ -327,6 +358,13 @@ $(document).ready(function() {
     });
 
     $("#guest_auth_logout").click(function() {
+        if($.protectData.unsavedChanges) {
+            if(confirm($.protectData.message))
+                $.protectData.unprotect();
+            else
+                return false;
+        }
+
         show_progress();
         $.getJSON(RSRC_BASE + "rsvp_server.php/guest_logout", function(data, status) {
             RSVP_DATA = data;
@@ -340,6 +378,7 @@ $(document).ready(function() {
     });
 
     $("#admin_show_grouplist").click(function() {
+        $.protectData.unprotect();
         show_progress();
         $(".wrsvp_action").hide();
         get_grouplist();
@@ -347,6 +386,7 @@ $(document).ready(function() {
     });
 
     $("#admin_show_search").click(function() {
+        $.protectData.unprotect();
         show_progress();
         $(".wrsvp_action").hide();
         $("#guest_auth .wrsvp_error").text("");
@@ -385,6 +425,7 @@ $(document).ready(function() {
         return false;
     });
     
+    $("#group_edit_form").protectData();
     $("#group_edit_form").submit(function() {
         var data = {};
         show_progress();
