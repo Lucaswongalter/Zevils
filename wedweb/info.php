@@ -39,7 +39,8 @@ per night. To obtain the group rate, you must make your reservation by
 or the MBTA's Silver and Blue Lines.  The hotel provides a free shuttle from the airport; call
 <span class="phone">(617) 568-1234</span> for pick-up.
 <a href="http://harborside.hyatt.com/hyatt/hotels/services/maps/index.jsp?icamp=propMapDirections">Detailed directions</a> are
-available on the hotel's website.</p>
+available on the hotel's website.  For anyone driving in, the hotel's parking
+is available on Sunday at a special flat rate of $12 for wedding guests.</p>
 </dd>
 
 </dl>
