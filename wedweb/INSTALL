@@ -1,0 +1,25 @@
+Database
+========
+
+The database for RSVPs must be a MySQL database.  To populate the initial
+schema, create a database under whatever name you want, and run "schema.sql"
+in it.
+
+Configuration file
+==================
+
+The configuration file goes in the home directory of whatever user PHP runs
+as.  The file must be called .wrsvp, and it is a JSON document.
+
+Example:
+
+{
+  "dbconfig": {
+    "host": "localhost",
+    "user": "root",
+    "pass": "",
+    "db": "wedding"
+  },
+  "admin_pass": "SooperSekrit!",
+  "rss_pass": "not_quite_so_sekrit"
+}
